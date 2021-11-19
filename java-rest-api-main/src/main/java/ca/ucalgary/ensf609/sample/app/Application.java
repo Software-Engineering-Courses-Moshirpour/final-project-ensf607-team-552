@@ -16,10 +16,14 @@ import ca.ucalgary.ensf609.sample.app.api.prescription.PrescriptionHandler;
 import ca.ucalgary.ensf609.sample.app.api.prescriptionitem.PrescriptionItemHandler;
 import ca.ucalgary.ensf609.sample.app.api.treatmentmethod.TreatmentMethodHandler;
 import ca.ucalgary.ensf609.sample.app.api.medicalrecordstype.MedicalRecordsTypeHandler;
-
+import ca.ucalgary.ensf609.sample.app.api.animalStatus.AnimalStatusHandler;
+import ca.ucalgary.ensf609.sample.app.api.animalStatusHistory.AnimalStatusHistoryHandler;
+import ca.ucalgary.ensf609.sample.app.api.history.HistoryHandler;
 
 //import ca.ucalgary.ensf609.sample.app.api.user.UserRegistrationHandler;
 import ca.ucalgary.ensf609.sample.app.api.user.UserRegistrationHandler;
+import ca.ucalgary.ensf609.sample.domain.animalStatus.AnimalStatus;
+import ca.ucalgary.ensf609.sample.domain.animalStatusHistory.AnimalStatusHistory;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 
@@ -53,13 +57,26 @@ class Application {
         MedicalRecordsTypeHandler medicalRecordsTypeHandler = new MedicalRecordsTypeHandler(Configuration.getMedicalRecordsTypeService(), Configuration.getObjectMapper(),
                 Configuration.getErrorHandler());
 
+        AnimalStatusHandler animalStatusHandler = new AnimalStatusHandler(Configuration.getAnimalStatusService(), Configuration.getObjectMapper(),
+                Configuration.getErrorHandler());
+
+        AnimalStatusHistoryHandler animalStatusHistoryHandler = new AnimalStatusHistoryHandler(Configuration.getAnimalStatusHistoryService(), Configuration.getObjectMapper(),
+                Configuration.getErrorHandler());
+
+        HistoryHandler historyHandler = new HistoryHandler(Configuration.getHistoryService(), Configuration.getObjectMapper(),
+                Configuration.getErrorHandler());
+
         server.createContext("/api/users/register", userRegistrationHandler::handle);
 
         server.createContext("/api/animals/register", animalHandler::handle);
 
         server.createContext("/api/comments/register", commentHandler::handle);
 
+        server.createContext("/api/history/register", historyHandler::handle);
 
+        server.createContext("/api/animalStatus/register", animalStatusHandler::handle);
+
+        server.createContext("/api/animalStatusHistory/register", animalStatusHistoryHandler::handle);
 
         server.createContext("/api/images/register", imageHandler::handle);
 

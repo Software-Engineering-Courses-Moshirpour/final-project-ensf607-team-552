@@ -13,6 +13,12 @@ import ca.ucalgary.ensf609.sample.domain.animal.AnimalRepository;
 import ca.ucalgary.ensf609.sample.domain.animal.AnimalService;
 import ca.ucalgary.ensf609.sample.domain.comment.CommentRepository;
 import ca.ucalgary.ensf609.sample.domain.comment.CommentService;
+import ca.ucalgary.ensf609.sample.domain.history.HistoryRepository;
+import ca.ucalgary.ensf609.sample.domain.history.HistoryService;
+import ca.ucalgary.ensf609.sample.domain.animalStatus.AnimalStatusRepository;
+import ca.ucalgary.ensf609.sample.domain.animalStatus.AnimalStatusService;
+import ca.ucalgary.ensf609.sample.domain.animalStatusHistory.AnimalStatusHistoryRepository;
+import ca.ucalgary.ensf609.sample.domain.animalStatusHistory.AnimalStatusHistoryService;
 import ca.ucalgary.ensf609.sample.domain.image.ImageRepository;
 import ca.ucalgary.ensf609.sample.domain.image.ImageService;
 import ca.ucalgary.ensf609.sample.domain.prescription.PrescriptionRepository;
@@ -41,6 +47,15 @@ class Configuration {
 
     private static final CommentRepository COMMENT_REPOSITORY = new InMemoryCommentRepository();
     private static final CommentService COMMENT_SERVICE = new CommentService(COMMENT_REPOSITORY);
+
+    private static final HistoryRepository HISTORY_REPOSITORY = new InMemoryHistoryRepository();
+    private static final HistoryService HISTORY_SERVICE = new HistoryService(HISTORY_REPOSITORY);
+
+    private static final AnimalStatusRepository ANIMALSTATUS_REPOSITORY = new InMemoryAnimalStatusRepository();
+    private static final AnimalStatusService ANIMALSTATUS_SERVICE = new AnimalStatusService(ANIMALSTATUS_REPOSITORY);
+
+    private static final AnimalStatusHistoryRepository ANIMALSTATUSHISTORY_REPOSITORY = new InMemoryAnimalStatusHistoryRepository();
+    private static final AnimalStatusHistoryService ANIMALSTATUSHISTORY_SERVICE = new AnimalStatusHistoryService(ANIMALSTATUSHISTORY_REPOSITORY);
 
     private static final ImageRepository IMAGE_REPOSITORY = new InMemoryImageRepository();
     private static final ImageService IMAGE_SERVICE = new ImageService(IMAGE_REPOSITORY);
@@ -74,6 +89,18 @@ class Configuration {
 
     static CommentService getCommentService() {
         return COMMENT_SERVICE;
+    }
+
+    static HistoryService getHistoryService() {
+        return HISTORY_SERVICE;
+    }
+    static HistoryRepository getHistoryRepository() {return HISTORY_REPOSITORY; }
+    static AnimalStatusService getAnimalStatusService() {
+        return ANIMALSTATUS_SERVICE;
+    }
+
+    static AnimalStatusHistoryService getAnimalStatusHistoryService() {
+        return ANIMALSTATUSHISTORY_SERVICE;
     }
 
     static ImageService getImageService() {
