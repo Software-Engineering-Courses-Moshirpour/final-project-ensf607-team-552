@@ -3,15 +3,16 @@ package ca.ucalgary.ensf609.sample.app;
 import ca.ucalgary.ensf609.sample.app.errors.GlobalExceptionHandler;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryAnimalRepository;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryCommentRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryImageRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryPrescriptionRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryTreatmentMethodRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryMedicalRecordsTypeRepository;
+import ca.ucalgary.ensf609.sample.data.user.*;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryUserRepository;
 //import ca.ucalgary.ensf609.sample.domain.animal.AnimalRepository;
 //import ca.ucalgary.ensf609.sample.domain.animal.AnimalService;
 //import ca.ucalgary.ensf609.sample.domain.comment.CommentRepository;
 //import ca.ucalgary.ensf609.sample.domain.comment.CommentService;
+import ca.ucalgary.ensf609.sample.domain.animal.AnimalRepository;
+import ca.ucalgary.ensf609.sample.domain.animal.AnimalService;
+import ca.ucalgary.ensf609.sample.domain.comment.CommentRepository;
+import ca.ucalgary.ensf609.sample.domain.comment.CommentService;
 import ca.ucalgary.ensf609.sample.domain.image.ImageRepository;
 import ca.ucalgary.ensf609.sample.domain.image.ImageService;
 import ca.ucalgary.ensf609.sample.domain.prescription.PrescriptionRepository;
@@ -23,19 +24,21 @@ import ca.ucalgary.ensf609.sample.domain.medicalrecordstype.MedicalRecordsTypeSe
 
 //import ca.ucalgary.ensf609.sample.domain.user.UserRepository;
 //import ca.ucalgary.ensf609.sample.domain.user.UserService;
+import ca.ucalgary.ensf609.sample.domain.user.UserRepository;
+import ca.ucalgary.ensf609.sample.domain.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class Configuration {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    //private static final UserRepository USER_REPOSITORY = new InMemoryUserRepository();
-    //private static final UserService USER_SERVICE = new UserService(USER_REPOSITORY);
+    private static final UserRepository USER_REPOSITORY = new InMemoryUserRepository();
+    private static final UserService USER_SERVICE = new UserService(USER_REPOSITORY);
 
-    //private static final AnimalRepository ANIMAL_REPOSITORY = new InMemoryAnimalRepository();
-    //private static final AnimalService ANIMAL_SERVICE = new AnimalService(ANIMAL_REPOSITORY);
+    private static final AnimalRepository ANIMAL_REPOSITORY = new InMemoryAnimalRepository();
+    private static final AnimalService ANIMAL_SERVICE = new AnimalService(ANIMAL_REPOSITORY);
 
-    //private static final CommentRepository COMMENT_REPOSITORY = new InMemoryCommentRepository();
-    //private static final CommentService COMMENT_SERVICE = new CommentService(COMMENT_REPOSITORY);
+    private static final CommentRepository COMMENT_REPOSITORY = new InMemoryCommentRepository();
+    private static final CommentService COMMENT_SERVICE = new CommentService(COMMENT_REPOSITORY);
 
     private static final ImageRepository IMAGE_REPOSITORY = new InMemoryImageRepository();
     private static final ImageService IMAGE_SERVICE = new ImageService(IMAGE_REPOSITORY);
@@ -56,7 +59,7 @@ class Configuration {
         return OBJECT_MAPPER;
     }
 
-    /*static UserService getUserService() {
+    static UserService getUserService() {
         return USER_SERVICE;
     }
 
@@ -67,7 +70,7 @@ class Configuration {
     static CommentService getCommentService() {
         return COMMENT_SERVICE;
     }
-    */
+
     static ImageService getImageService() {
         return IMAGE_SERVICE;
     }
@@ -97,11 +100,11 @@ class Configuration {
         return MEDICALRECORDSTYPE_REPOSITORY;
     }
 
-/*
+
     static UserRepository getUserRepository() {
         return USER_REPOSITORY;
     }
-*/
+
     public static GlobalExceptionHandler getErrorHandler() {
         return GLOBAL_ERROR_HANDLER;
     }
