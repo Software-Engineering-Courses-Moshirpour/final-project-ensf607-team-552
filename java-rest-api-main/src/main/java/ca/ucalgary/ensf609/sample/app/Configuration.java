@@ -3,10 +3,7 @@ package ca.ucalgary.ensf609.sample.app;
 import ca.ucalgary.ensf609.sample.app.errors.GlobalExceptionHandler;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryAnimalRepository;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryCommentRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryImageRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryPrescriptionRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryTreatmentMethodRepository;
-import ca.ucalgary.ensf609.sample.data.user.InMemoryMedicalRecordsTypeRepository;
+import ca.ucalgary.ensf609.sample.data.user.*;
 //import ca.ucalgary.ensf609.sample.data.user.InMemoryUserRepository;
 //import ca.ucalgary.ensf609.sample.domain.animal.AnimalRepository;
 //import ca.ucalgary.ensf609.sample.domain.animal.AnimalService;
@@ -16,6 +13,9 @@ import ca.ucalgary.ensf609.sample.domain.image.ImageRepository;
 import ca.ucalgary.ensf609.sample.domain.image.ImageService;
 import ca.ucalgary.ensf609.sample.domain.prescription.PrescriptionRepository;
 import ca.ucalgary.ensf609.sample.domain.prescription.PrescriptionService;
+import ca.ucalgary.ensf609.sample.domain.prescriptionitem.PrescriptionItemRepository;
+import ca.ucalgary.ensf609.sample.domain.prescriptionitem.PrescriptionItemService;
+
 import ca.ucalgary.ensf609.sample.domain.treatmentmethod.TreatmentMethodRepository;
 import ca.ucalgary.ensf609.sample.domain.treatmentmethod.TreatmentMethodService;
 import ca.ucalgary.ensf609.sample.domain.medicalrecordstype.MedicalRecordsTypeRepository;
@@ -50,6 +50,9 @@ class Configuration {
     private static final PrescriptionRepository PRESCRIPTION_REPOSITORY = new InMemoryPrescriptionRepository();
     private static final PrescriptionService PRESCRIPTION_SERVICE = new PrescriptionService(PRESCRIPTION_REPOSITORY);
 
+    private static final PrescriptionItemRepository PRESCRIPTIONITEM_REPOSITORY = new InMemoryPrescriptionItemRepository();
+    private static final PrescriptionItemService PRESCRIPTIONITEM_SERVICE = new PrescriptionItemService(PRESCRIPTIONITEM_REPOSITORY);
+
     private static final GlobalExceptionHandler GLOBAL_ERROR_HANDLER = new GlobalExceptionHandler(OBJECT_MAPPER);
 
     static ObjectMapper getObjectMapper() {
@@ -82,6 +85,14 @@ class Configuration {
     static PrescriptionRepository getPrescriptionRepository() {
         return PRESCRIPTION_REPOSITORY;
     }
+
+    static PrescriptionItemService getPrescriptionItemService() {
+        return PRESCRIPTIONITEM_SERVICE;
+    }
+    static PrescriptionItemRepository getPrescriptionItemRepository() {
+        return PRESCRIPTIONITEM_REPOSITORY;
+    }
+
 
     static TreatmentMethodService getTreatmentMethodService() {
         return TREATMENTMETHOD_SERVICE;

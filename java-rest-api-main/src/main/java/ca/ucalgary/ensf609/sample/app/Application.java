@@ -11,6 +11,7 @@ import ca.ucalgary.ensf609.sample.app.api.ApiUtils;
 //import ca.ucalgary.ensf609.sample.app.api.comment.CommentHandler;
 import ca.ucalgary.ensf609.sample.app.api.image.ImageHandler;
 import ca.ucalgary.ensf609.sample.app.api.prescription.PrescriptionHandler;
+import ca.ucalgary.ensf609.sample.app.api.prescriptionitem.PrescriptionItemHandler;
 import ca.ucalgary.ensf609.sample.app.api.treatmentmethod.TreatmentMethodHandler;
 import ca.ucalgary.ensf609.sample.app.api.medicalrecordstype.MedicalRecordsTypeHandler;
 
@@ -46,6 +47,8 @@ class Application {
         MedicalRecordsTypeHandler medicalRecordsTypeHandler = new MedicalRecordsTypeHandler(Configuration.getMedicalRecordsTypeService(), Configuration.getObjectMapper(),
                 Configuration.getErrorHandler());
 
+        PrescriptionItemHandler prescriptionItemHandler = new PrescriptionItemHandler(Configuration.getPrescriptionItemService(), Configuration.getObjectMapper(),
+                Configuration.getErrorHandler());
         //server.createContext("/api/users/register", userRegistrationHandler::handle);
 
         //server.createContext("/api/animals/register", animalHandler::handle);
@@ -55,6 +58,8 @@ class Application {
         server.createContext("/api/images/register", imageHandler::handle);
 
         server.createContext("/api/prescriptions/register", prescriptionHandler::handle);
+
+        server.createContext("/api/prescriptionitems/register", prescriptionItemHandler::handle);
 
         server.createContext("/api/treatmentmethods/register", treatmentMethodHandler::handle);
 
