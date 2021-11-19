@@ -22,7 +22,7 @@ public class HttpHistoryTest {
 
     private String getEndpoint(String rest) {
         StringBuilder builder = new StringBuilder();
-        builder.append(serverHost).append(":").append(serverPort).append("/api/History/register").append(rest);
+        builder.append(serverHost).append(":").append(serverPort).append("/api/history/register").append(rest);
         return builder.toString();
     }
 
