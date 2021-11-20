@@ -125,7 +125,7 @@ public class HttpPrescriptionRestTest {
         NewPrescription prescription = NewPrescription.builder()
                 .userId(1)
                 .animalID(1)
-                .createDate("2021,3,2")
+                .createDate("202132")
                 .description("The animal's prescription(description) update")
                 .build();
 

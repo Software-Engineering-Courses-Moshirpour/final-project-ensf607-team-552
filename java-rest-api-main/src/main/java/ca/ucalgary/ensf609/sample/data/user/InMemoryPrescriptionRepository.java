@@ -19,6 +19,7 @@ public class InMemoryPrescriptionRepository implements PrescriptionRepository {
                 .id(id)
                 .userId(newPrescription.getUserId())
                 .animalID(newPrescription.getAnimalID())
+                .createDate(newPrescription.getCreateDate())
                 .description(newPrescription.getDescription())
                 .build();
         PRESCRIPTIONS_STORE.put(id, prescription);
