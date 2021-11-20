@@ -17,3 +17,17 @@ java-rest-api-main/src/main/java/ca/ucalgary/ensf609/sample/data/user/ contains 
 
 java-rest-api-main/src/main/java/ca/ucalgary/ensf609/sample/domain/ contains folders of domains for different stories.
 
+api explanation:
+
+1. /api/users/register                users related operations
+2. /api/animals/register              animals related operations
+3. /api/comments/register             comments related operations
+4. /api/history/register              history related operations
+5. /api/animalStatus/register         animalStatus related operations
+6. /api/animalStatusHistory/register  animalStatusHistory related operations
+7. /api/images/register               images related operations
+8. /api/prescriptions/register        prescriptions related operations
+9. /api/prescriptionitems/register    prescriptionitems related operations
+10. /api/treatmentmethods/register    treatmentmethods related operations
+11. /api/medicalrecordstypes/register medicalrecordstypes related operations
+
