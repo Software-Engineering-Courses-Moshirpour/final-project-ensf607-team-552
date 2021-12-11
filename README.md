@@ -3,7 +3,7 @@
 
 *ENSF 607 - Advanced Software Development and Architecture*
 
-*Assignment 6 - Hachathon & Sprint 4*
+*Sprint 4 & Hachathon*
 
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
