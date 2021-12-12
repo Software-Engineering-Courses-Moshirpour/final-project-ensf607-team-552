@@ -138,6 +138,10 @@ const AniamlMgt = () => {
             </Space>
           ),
         },
+        {
+           title: 'Comment',
+           dataIndex: 'comment',
+           },
       ];
 
       const req_columns = [
