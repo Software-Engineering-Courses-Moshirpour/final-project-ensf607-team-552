@@ -12,7 +12,8 @@ How to run the project:
         
         run application.java  in VET-APP-BE/src/main/java/com
         
-3. Run frontend: 
+2. Run frontend: 
+       in VET-APP-FE/
     
         npm install
     
