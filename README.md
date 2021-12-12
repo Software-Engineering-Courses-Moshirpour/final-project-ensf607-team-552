@@ -8,7 +8,12 @@
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
 How to run the project: 
-1. Run backend:  run application.java  in VET-APP-BE/src/main/java/com
-2. Run frontend: 
-    npm install
-    npm start
+1. Run backend:  
+        
+        run application.java  in VET-APP-BE/src/main/java/com
+        
+3. Run frontend: 
+    
+        npm install
+    
+        npm start
