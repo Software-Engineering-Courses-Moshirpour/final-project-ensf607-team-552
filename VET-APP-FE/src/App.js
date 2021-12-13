@@ -15,6 +15,9 @@ import ReqMgt from './components/Mgt/Req/ReqMgt';
 import AnimalProfile from './components/Profile/AnimalProfile';
 
 
+import TreatmentMgt from './components/Mgt/TreatmentMgt';
+
+
 import { authActions } from './store/auth';
 import { useDispatch } from 'react-redux';
 import AnimalEdit from './components/Mgt/AnimalEdit';
@@ -68,6 +71,10 @@ function App() {
       <Route path="/animalProfile/:id/view" exact>
         {!isAuth && <Auth />}
         {isAuth && <AnimalProfile />}
+      </Route>
+      <Route path="/treatmentMgt" exact>
+        {!isAuth && <Auth />}
+        {isAuth && <TreatmentMgt />}
       </Route>
       </main>
     </Fragment>
