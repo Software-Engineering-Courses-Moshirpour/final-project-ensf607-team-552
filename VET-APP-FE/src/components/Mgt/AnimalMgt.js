@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from '../Api/request';
 import moment from 'moment';
-import { PENDING,statusData } from '../DummyData/dummy';
+import { PENDING,ROLE_ADMIN,ROLE_STUDENT,ROLE_TEACHINGTECH,statusData } from '../DummyData/dummy';
 import { useForm } from 'antd/lib/form/Form';
 
 
@@ -23,8 +23,10 @@ const AniamlMgt = () => {
       const [animalId, setanimalId] = useState(0);
 
       useEffect(() => {
-        loadAnimal();
-        loadUser();
+        if(userData.length==0 && animalData.length==0){
+          loadAnimal();
+          loadUser();
+        }
       }, [])
 
       useEffect(() => {
@@ -52,6 +54,16 @@ const AniamlMgt = () => {
         setanimalId(key);
         setIsModalVisible(true);
       };
+
+      
+      function viewComments(key) {
+        history.push(`/animalProfile/${key}/view`)
+      };
+
+      function viewAnimalProfile(key) {
+        history.push(`/animalProfile/${key}/view`)
+      };
+
 
       const handleOk = () => {
         setIsModalVisible(false);
@@ -95,10 +107,17 @@ const AniamlMgt = () => {
     };
 
     function loadAnimal(){
-      axios.get("api/animal/getAvailableAnimal")
+      if(localStorage.getItem("role")==ROLE_ADMIN){
+        axios.get("api/animal/getAllAnimal")
       .then(res=>{
         setAnimalData(res.data.data);  
       })
+      }else{
+        axios.get("api/animal/getAvailableAnimal")
+      .then(res=>{
+        setAnimalData(res.data.data);  
+      })
+      }  
     }
     function loadRequest(){
       axios.get("api/request/getAllRequestbyUserID")
@@ -111,7 +130,6 @@ const AniamlMgt = () => {
       axios.get("api/user/getAllUserByRole")
       .then(res=>{
         setUserData(res.data.data);  
-        //console.log(res.data.data);
       })
       
     }
@@ -145,6 +163,7 @@ const AniamlMgt = () => {
           {
             title: 'Age',
             dataIndex: 'age',
+            sorter: (a, b) => a.age - b.age,
           },
         {
           title: 'Breed',
@@ -153,12 +172,14 @@ const AniamlMgt = () => {
         {
           title: 'Status',
           dataIndex: 'status',
+          sorter: (a, b) =>  a.status.localeCompare(b.status),
         }, 
         {
           title: 'Request to',
           dataIndex: 'userid',
           render:(text,record) => (
-              <Select
+            localStorage.getItem("role")==ROLE_TEACHINGTECH?
+              (<Select
               placeholder="Select a technician"
               onChange={(e)=>handleChange(e, text, record)}
               allowClear
@@ -166,19 +187,20 @@ const AniamlMgt = () => {
               {userData.map(rl =>(
                   <Option key={rl.id} value={rl.id}>{rl.id}</Option>
               ))}
-              </Select>
+              </Select>):""
           )
         },
         {
           title: 'Action',
           key: 'action',
           render: (text, record) => (
-
             <Space size="middle">
-              <Button onClick={() => handleRequest(record)}>Request</Button>
+              {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleRequest(record)}>Request</Button>}
               <Button onClick={() => editAnimal(record.key)}>Edit</Button>
               <Button onClick={() => viewAnimal(record.key)}>View</Button>
-              <Button onClick={() => commentAnimal(record.key)}>Comment</Button>
+              {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
+              {localStorage.getItem("role")==ROLE_ADMIN  && <Button onClick={() => viewComments(record.key)}>View Comments</Button>} 
+              {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}
               <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
               <Form 
                   form={commentForm}

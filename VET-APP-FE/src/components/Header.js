@@ -5,11 +5,18 @@ import classes from './Header.module.css';
 import { authActions } from '../store/auth';
 import { Popconfirm, message } from 'antd';
 import { useHistory } from "react-router-dom";
+import { useState,useEffect } from 'react';
 
 const Header = () => {
   let history = useHistory();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const [username, setusername] = useState('');
+
+
+  useEffect(() => {
+   setusername(localStorage.getItem("userName"))
+  }, [localStorage.getItem("userName")])
 
 
   function confirm(e) {
@@ -30,6 +37,9 @@ const Header = () => {
       {isAuth && (
         <nav>
           <ul>
+            <li>
+              current user is: {username}
+            </li>
             <li>
             <Popconfirm
               title="Are you sure to log out?"
