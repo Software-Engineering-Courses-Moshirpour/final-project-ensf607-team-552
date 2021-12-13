@@ -12,6 +12,7 @@ import UserAdd from './components/Mgt/UserAdd';
 
 import AnimalMgt from './components/Mgt/AnimalMgt';
 import ReqMgt from './components/Mgt/Req/ReqMgt';
+import AnimalProfile from './components/Profile/AnimalProfile';
 
 
 import { authActions } from './store/auth';
@@ -37,7 +38,7 @@ function App() {
       <Route path="/" exact>
         {!isAuth && <Auth />}
         {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <UserMgt />}
-        {isAuth && <AnimalMgt />}
+        {localStorage.getItem("role")!=ROLE_ADMIN &&isAuth && <AnimalMgt />}
       </Route>
       <Route path="/pwdReset">
       {!isAuth &&  <ResetPwd />} 
@@ -63,6 +64,10 @@ function App() {
       <Route path="/reqMgt" exact>
         {!isAuth && <Auth />}
         {isAuth && <ReqMgt />}
+      </Route>
+      <Route path="/animalProfile/:id/view" exact>
+        {!isAuth && <Auth />}
+        {isAuth && <AnimalProfile />}
       </Route>
       </main>
     </Fragment>

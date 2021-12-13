@@ -24,7 +24,6 @@ const UserMgt = () => {
       }, [])
 
       userData.map(ud=>{
-        console.log(ud);
         data.push({
             ...ud,
             key:ud.id,
