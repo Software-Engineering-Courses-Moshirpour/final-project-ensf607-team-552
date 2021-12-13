@@ -1,34 +1,26 @@
 package com.pojo;
 
-        import com.enums.RequestStatus;
-        import com.enums.Status;
-        import com.model.Role;
-        import lombok.Data;
+import com.enums.RequestStatus;
+import lombok.Data;
 
-        import javax.persistence.Entity;
-        import javax.persistence.Id;
-        import javax.validation.constraints.Email;
-        import javax.validation.constraints.NotBlank;
-        import javax.validation.constraints.Size;
-        import java.time.LocalDate;
-        import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 
 @Data
 @Entity
-public class Reqobj {
+public class CommentObj {
 
     @NotBlank
     private String id;
 
-    private RequestStatus adminstatus;
-    private RequestStatus techstatus;
-    private LocalDate reqDate;
-    private LocalDate returnDate;
-    private String returnedUser;
-    private long userid;
-    private int animalid;
-    private int instructId;
+    private String description;
+    @NotBlank
+    private long userId;
+    @NotBlank
+    private int animalId;
 
 
     public void setId(String id) {
