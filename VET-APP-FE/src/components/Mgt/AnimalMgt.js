@@ -1,4 +1,4 @@
-import { Row,Col,Space, Button,Popconfirm,message,Form,Select,Modal,Input   } from 'antd'
+import { Row,Col,Space, Button,Popconfirm,message,Form,Select,Modal,Input,Spin  } from 'antd'
 import React from 'react'
 import Transition from '../Static/Transition'
 import { Table } from 'antd';
@@ -16,6 +16,7 @@ const AniamlMgt = () => {
       const [userData, setUserData] = useState([]);
       const [reqData, setReqData] = useState([]);
       const [isModalVisible, setIsModalVisible] = useState(false);
+      const [loading, setloading] = useState(true);
       let history = useHistory();
       const [commentForm]=useForm();
 
@@ -111,11 +112,13 @@ const AniamlMgt = () => {
         axios.get("api/animal/getAllAnimal")
       .then(res=>{
         setAnimalData(res.data.data);  
+        setloading(false);
       })
       }else{
         axios.get("api/animal/getAvailableAnimal")
       .then(res=>{
         setAnimalData(res.data.data);  
+        setloading(false);
       })
       }  
     }
@@ -246,9 +249,8 @@ const AniamlMgt = () => {
         </Col>
         <Col span={16} style={{marginTop:"20px"}}>
            <h1>Animal Management</h1>
-           <Table bordered columns={columns} dataSource={data} />
-           {/* <h1>Your Request</h1>
-           <Table bordered columns={req_columns} dataSource={data} /> */}
+           {loading && <Spin tip="Loading..."/>}
+           {!loading &&  <Table bordered columns={columns} dataSource={data} />}
         </Col>
         </Row>
         </React.Fragment>

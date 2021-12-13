@@ -18,7 +18,7 @@ const AnimalProfile = () => {
 
     useEffect(() => {
       axios.get("api/animal/getAnimalById?id="+id)
-      .then(res=>{      
+      .then(res=>{    
           setcommentData(res.data.data.comments)
           setsrc(res.data.data.url)
           data.push({
@@ -54,7 +54,7 @@ const AnimalProfile = () => {
                     
                     <Comment
                     key={cd.id}
-                    author={<a>Han Solo</a>}
+                    author={<a>{cd.user}</a>}
                     avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
                     content={
                       <p>
