@@ -1,4 +1,4 @@
-import { Row,Col,Space, Button,Popconfirm,message,Form,Select   } from 'antd'
+import { Row,Col,Space, Button,Popconfirm,message,Form,Select,Modal,Input   } from 'antd'
 import React from 'react'
 import Transition from '../Static/Transition'
 import { Table } from 'antd';
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import axios from '../Api/request';
 import moment from 'moment';
 import { PENDING,statusData } from '../DummyData/dummy';
+import { useForm } from 'antd/lib/form/Form';
 
 
 const AniamlMgt = () => {
@@ -14,10 +15,12 @@ const AniamlMgt = () => {
       const [animalData, setAnimalData] = useState([]);
       const [userData, setUserData] = useState([]);
       const [reqData, setReqData] = useState([]);
+      const [isModalVisible, setIsModalVisible] = useState(false);
       let history = useHistory();
+      const [commentForm]=useForm();
 
-      //const data = [];
       const [data, setData] = useState([]);
+      const [animalId, setanimalId] = useState(0);
 
       useEffect(() => {
         loadAnimal();
@@ -34,6 +37,29 @@ const AniamlMgt = () => {
           ))
           setData(temp);
       }, [animalData])
+
+      function editAnimal(key) {
+        history.push(`/animalMgt/${key}/edit`)
+     };
+
+
+     function viewAnimal(key) {
+        // history.push(`/animalMgt/${key}/edit`)
+      };
+
+      function commentAnimal(key) {
+        // history.push(`/animalMgt/${key}/edit`)
+        setanimalId(key);
+        setIsModalVisible(true);
+      };
+
+      const handleOk = () => {
+        setIsModalVisible(false);
+      };
+    
+      const handleCancel = () => {
+        setIsModalVisible(false);
+      };
 
    
      function reqAnimal(animalstatus,animalID,userID) {
@@ -62,12 +88,7 @@ const AniamlMgt = () => {
       let dataTemp = data
       let rowIndex = dataTemp.find((item) => item.id = record.id)
       dataTemp.splice(rowIndex, 1, record);
-      setData(dataTemp)
-      //console.log(value);
-      //console.log(v1);
-      //console.log(record.key);
-      //console.log(value);
-      //console.log(uid);
+      setData(dataTemp);
     };
     const handleRequest = (record) => {
       reqAnimal(record.adminstatus,record.id,record.requestTo);
@@ -94,10 +115,31 @@ const AniamlMgt = () => {
       })
       
     }
+
+    const onFinish = (values) => {
+      axios.post("api/comment/addComment",{...values, description:values.description, animalId:animalId,userId:localStorage.getItem("userId")})
+      .then(res=>{  
+        message.success(res.data.message);
+        setIsModalVisible(false);
+        commentForm.resetFields();
+      })
+    };
+  
+    const onFinishFailed = (errorInfo) => {
+      
+    };
     const columns = [
         {
           title: 'ID',
           dataIndex: 'id',
+          
+        },
+        {
+          title: 'Image',
+          dataIndex: 'url',
+          render:(text,record) => (
+           <img src={record.url} style={{width:"100px"}}/>
+        )
           
         },
           {
@@ -118,8 +160,6 @@ const AniamlMgt = () => {
           render:(text,record) => (
               <Select
               placeholder="Select a technician"
-              //value={record.requestTo}
-              //onChange = {handleChange}
               onChange={(e)=>handleChange(e, text, record)}
               allowClear
               >
@@ -133,63 +173,48 @@ const AniamlMgt = () => {
           title: 'Action',
           key: 'action',
           render: (text, record) => (
+
             <Space size="middle">
               <Button onClick={() => handleRequest(record)}>Request</Button>
+              <Button onClick={() => editAnimal(record.key)}>Edit</Button>
+              <Button onClick={() => viewAnimal(record.key)}>View</Button>
+              <Button onClick={() => commentAnimal(record.key)}>Comment</Button>
+              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <Form 
+                  form={commentForm}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 16 }}
+                  name="dynamic_rule">
+
+
+                      <Form.Item
+                          name="description"
+                          label="description"
+                          rules={[
+                          {
+                              required: true,
+                              message: 'Please input your description',
+                          },
+                          ]}
+                      >
+                          <Input placeholder="Please input your description" />
+                      </Form.Item>
+                      <Form.Item  wrapperCol={{ offset: 6, span: 16 }}>
+                          <Button type="primary" htmlType="submit">
+                          Submit
+                          </Button>
+                      </Form.Item>
+                      
+                  </Form>
+              </Modal>
             </Space>
           ),
         },
       ];
 
-      const req_columns = [
-        {
-          title: 'ID',
-          dataIndex: 'id',
-          
-        },
-          {
-            title: 'Admin Status',
-            dataIndex: 'age',
-          },
-        {
-          title: 'Request Date',
-          dataIndex: 'breed',
-        },
-        {
-          title: 'Return Date',
-          dataIndex: 'status',
-        }, 
-        {
-          title: 'Return By',
-          dataIndex: 'userid',
-        },        
-        {
-          title: 'Tech Status',
-          dataIndex: 'userid',
-        },
-        {
-          title: 'Animal ID',
-          dataIndex: 'userid',
-        },
-        {
-          title: 'Tech ID',
-          dataIndex: 'userid',
-        },
-        {
-          title: 'Submitted By',
-          dataIndex: 'userid',
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-            <Space size="middle">              
-              <Button onClick={() => handleRequest(record)}>Cancle</Button>
-            </Space>
-          ),
-        },
-      ];
- 
-// <Button onClick={() => reqAnimal(record.key)}>Request</Button>
+
 
     return (
         <React.Fragment>

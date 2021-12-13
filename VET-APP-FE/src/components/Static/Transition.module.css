@@ -1,6 +1,6 @@
 .mySidenav a {
     position: absolute;
-    left: -70px;
+    left: 0px;
     transition: 0.1s;
     padding: 15px;
     width: 200px;
@@ -9,14 +9,11 @@
     color: transparent;
     border-radius: 0 5px 5px 0;
     margin-top: 80px;
+    color: white;
     
   }
   
-  .mySidenav a:hover {
-    left: 0;
-    color: white;
-  }
-  
+
   .user {
     top: 20px;
     background-color: #04AA6D;
