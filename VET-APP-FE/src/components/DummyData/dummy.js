@@ -33,6 +33,28 @@
     },
   ]
 
+
+  
+  const animalStatus1 =[
+    {
+      id:'1',
+      stsName:'Available'
+  },
+    {
+      id:'2',
+      stsName:'Injured'
+  },
+  {
+    id:'3',
+    stsName:'Sick'
+  },
+  {
+    id:'4',
+    stsName:'Unavailable'
+  }
+  ]
+
+
   const statusData1 =[
     {
       id:'1',
@@ -48,6 +70,7 @@
   }
   ]
 
+  export const animalStatus=animalStatus1;
 
   export const roledata = roleData;
 

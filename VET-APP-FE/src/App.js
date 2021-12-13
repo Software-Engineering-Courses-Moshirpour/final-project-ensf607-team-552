@@ -16,6 +16,8 @@ import ReqMgt from './components/Mgt/Req/ReqMgt';
 
 import { authActions } from './store/auth';
 import { useDispatch } from 'react-redux';
+import AnimalEdit from './components/Mgt/AnimalEdit';
+import { ROLE_ADMIN,ROLE_ANIMALHTTECH } from './components/DummyData/dummy';
 
 
 
@@ -34,14 +36,15 @@ function App() {
       <main>
       <Route path="/" exact>
         {!isAuth && <Auth />}
-        {isAuth && <UserMgt />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <UserMgt />}
+        {isAuth && <AnimalMgt />}
       </Route>
       <Route path="/pwdReset">
       {!isAuth &&  <ResetPwd />} 
       </Route>
       <Route path="/userMgt" exact>
         {!isAuth && <Auth />}
-        {isAuth && <UserMgt />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <UserMgt />}
       </Route>
       <Route path='/userMgt/:id/edit'>
        {isAuth && <UserEdit/>}
@@ -52,6 +55,9 @@ function App() {
       </Route>
       <Route path="/animalMgt" exact>
         <AnimalMgt />
+      </Route>
+      <Route path='/animalMgt/:id/edit'>
+       {isAuth && <AnimalEdit/>}
       </Route>
       {/* request mgmt */}
       <Route path="/reqMgt" exact>

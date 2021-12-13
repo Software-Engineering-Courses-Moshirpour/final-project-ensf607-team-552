@@ -3,6 +3,8 @@ package com.controller;
 import com.enums.AnimalStatus;
 import com.model.ResponseTemplate;
 
+import com.model.User;
+import com.pojo.Userobj;
 import com.repository.RoleDao;
 import com.repository.UserDao;
 import com.service.S3Service;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -51,9 +54,24 @@ public class AnimalController {
 
 
 
+    @RequestMapping(value = "/getanimalById", method = RequestMethod.GET)
+    public ResponseTemplate fetchById(Animal animalObj) {
+
+        ResponseTemplate ret = new ResponseTemplate();
+
+
+        Optional<Animal> animal= animalRepository.findById(animalObj.getId());
+        ret.setData(animal);
+        ret.setCode(HttpStatus.OK.value());
+        ret.setMessage("find animal by id succ");
+        return ret;
+    }
+
+
+
     @AllowAnon
     @PostMapping(value = "/imageupload")
-    public Map<String, String> imageupload(@RequestParam(value = "file") MultipartFile file) {
+    public Map<String, String> imageupload(@RequestParam(value = "file") MultipartFile file, @RequestParam(value="id")int id) {
         Map<String, String> map = new HashMap<>();
         String fileName = file.getOriginalFilename();
 
@@ -70,6 +88,9 @@ public class AnimalController {
             file.transferTo(uploadedFile);
             String returnName = S3Util.getDateFilename(fileName);
             String s3Path = s3Service.upload2Down(rootPath+File.separator+fileName, returnName, uploadedFile);
+            Animal animalindb = animalRepository.findById(id).get();
+            animalindb.setUrl(s3Path);
+            animalRepository.save(animalindb);
             map.put("url", s3Path);
             map.put("state", "SUCCESS");
             map.put("original", "");
@@ -80,6 +101,27 @@ public class AnimalController {
         }
 
         return map;
+    }
+
+
+    @RequestMapping(value = "/updateAnimalStatusImage", method = RequestMethod.POST)
+    public ResponseTemplate updateUserConfig(@RequestBody Animal animal, HttpServletRequest request) {
+
+        ResponseTemplate ret = new ResponseTemplate();
+        Animal animalfromdb = animalRepository.findById(animal.getId()).get();
+        if(animalfromdb!=null){
+            animalfromdb.setUrl(animal.getUrl());
+            animalfromdb.setStatus(animal.getStatus());
+            animalRepository.save(animalfromdb);
+            ret.setCode(HttpStatus.OK.value());
+            ret.setMessage("update succ");
+        }else{
+            ret.setCode(HttpStatus.BAD_REQUEST.value());
+            ret.setMessage("cannot find this animal");
+        }
+
+
+        return ret;
     }
 
 

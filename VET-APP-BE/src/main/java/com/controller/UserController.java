@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.enums.Status;
 import com.jwt.response.MessageResponse;
 import com.model.*;
 import com.pojo.Userobj;
@@ -154,5 +155,21 @@ public class UserController {
 
         return ret;
     }
+
+
+    @RequestMapping(value = "/blockuserById", method = RequestMethod.GET)
+    public ResponseTemplate blockuserById(@RequestParam(value = "id")Long id) {
+
+        ResponseTemplate ret = new ResponseTemplate();
+
+        User userfromdb= userRepository.findById(id).get();
+        userfromdb.setStatus(Status.INACTIVE);
+        userRepository.save(userfromdb);
+        ret.setData(userfromdb);
+        ret.setCode(HttpStatus.OK.value());
+        ret.setMessage("block user by id succ");
+        return ret;
+    }
+
 
 }

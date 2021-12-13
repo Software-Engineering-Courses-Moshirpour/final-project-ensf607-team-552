@@ -56,6 +56,14 @@ const UserMgt = () => {
       };
 
 
+      function blockUser(key){
+        axios.get("api/user/blockuserById?id="+key)
+        .then(res=>{
+          message.success(res.data.message);
+        })
+      }
+
+
 
     const columns = [
         {
@@ -89,7 +97,7 @@ const UserMgt = () => {
                     >
                    <Button>Delete</Button>
                 </Popconfirm>
-                <Button>Block</Button>
+                <Button onClick={() => blockUser(record.key)}>Block</Button>
               </Space>
             ),
         },
