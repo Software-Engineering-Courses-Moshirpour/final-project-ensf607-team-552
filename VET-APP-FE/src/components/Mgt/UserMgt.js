@@ -1,4 +1,4 @@
-import { Row,Col,Space, Button,Popconfirm,message   } from 'antd'
+import { Row,Col,Space, Button,Popconfirm,message,Spin} from 'antd'
 import React from 'react'
 import Transition from '../Static/Transition'
 import { Table } from 'antd';
@@ -9,7 +9,7 @@ import moment from 'moment';
 
 
 const UserMgt = () => {
-
+      const [loading, setloading] = useState(true);
       const [userData, setuserData] = useState([]);
 
       let history = useHistory();
@@ -20,10 +20,12 @@ const UserMgt = () => {
         axios.get("api/user/getalluser")
         .then(res=>{
           setuserData(res.data.data);  
+          setloading(false);
         })
       }, [])
 
       userData.map(ud=>{
+        if(ud.id!=localStorage.getItem("userId")){
         data.push({
             ...ud,
             key:ud.id,
@@ -31,6 +33,7 @@ const UserMgt = () => {
             createdAt:moment(new Date(ud.createdAt)).format('YYYY-MM-DD'),
             role:ud.roles?ud.roles[0].roleName:"ROLE_ADMIN"
           })
+        }
       });
 
 
@@ -113,8 +116,8 @@ const UserMgt = () => {
         </Col>
         <Col span={16} style={{marginTop:"20px"}}>
            <h1>User Management</h1>
-                            
-           <Table bordered columns={columns} dataSource={data} />
+           {loading && <Spin tip="Loading..."/>}                 
+           {!loading &&  <Table bordered columns={columns} dataSource={data} />}
         </Col>
         <Col span={2} style={{marginTop:"20px", marginLeft:"-90px"}}>
            <Button type="primary" onClick={addUser}>Add User</Button>        

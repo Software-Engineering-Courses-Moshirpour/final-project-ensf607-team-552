@@ -1,4 +1,4 @@
-import { Row,Col,Space, Button,Popconfirm,message   } from 'antd'
+import { Row,Col,Space, Button,Popconfirm,message, Spin   } from 'antd'
 import React from 'react'
 import Transition from '../../Static/Transition'
 import { Table } from 'antd';
@@ -10,7 +10,7 @@ import { APPROVED, DECLINED, ROLE_ADMIN, ROLE_ANIMALHTTECH, ROLE_TEACHINGTECH } 
 
 
 const ReqMgt = () => {
-
+      const [loading, setloading] = useState(true);
       const [requestData, setrequestData] = useState([]);
 
       let history = useHistory();
@@ -105,17 +105,20 @@ const ReqMgt = () => {
         axios.get("api/request/getallrequests?userid="+localStorage.getItem("userId"))
         .then(res=>{
           setrequestData(res.data.data);  
+          setloading(false);
         })}
         else if(localStorage.getItem("role")==ROLE_ADMIN){
           axios.get("api/request/getallrequestsForAdmin")
           .then(res=>{
             setrequestData(res.data.data);  
+            setloading(false);
           })
         }
         else if(localStorage.getItem("role")==ROLE_TEACHINGTECH){
           axios.get("api/request/getallrequestsByInstruct?instrucId="+localStorage.getItem("userId"))
           .then(res=>{
             setrequestData(res.data.data);  
+            setloading(false);
           })
         }
       }
@@ -178,8 +181,8 @@ const ReqMgt = () => {
         </Col>
         <Col span={16} style={{marginTop:"20px"}}>
            <h1>Request Management</h1>
-                            
-           <Table bordered columns={columns} dataSource={data} />
+           {loading && <Spin tip="Loading..."/>}                       
+           {!loading && <Table bordered columns={columns} dataSource={data} />}
         </Col>
 
        
