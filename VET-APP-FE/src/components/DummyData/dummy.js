@@ -62,19 +62,19 @@
   const treatmentMethod1 =[
     {
       id:'1',
-      stsName:'Physical exam'
+      stsName:'PhysicalExam'
   },
     {
       id:'2',
-      stsName:'Blood work'
+      stsName:'BloodWork'
   },
   {
     id:'3',
-    stsName:'Bordetella vaccine'
+    stsName:'BordetellaVaccine'
   },
   {
     id:'4',
-    stsName:'Dental cleaning'
+    stsName:'DentalCleaning'
   },
   {
     id:'5',
@@ -82,11 +82,11 @@
   },
   {
     id:'6',
-    stsName:'Rabies Vaccination'
+    stsName:'RabiesVaccination'
   },
   {
     id:'7',
-    stsName:'Chemo Treatment'
+    stsName:'ChemoTreatment'
   }
   ]
 

@@ -18,6 +18,7 @@ import AnimalProfile from './components/Profile/AnimalProfile';
 
 
 import TreatmentMgt from './components/Mgt/TreatmentMgt';
+import PrescriptionMgt from './components/Mgt/PrescriptionMgt';
 
 
 import { authActions } from './store/auth';
@@ -84,7 +85,10 @@ function App() {
       <Route path="/treatmentMgt/:id/edit" exact>
        {isAuth && <AnimalPrescribe/>}
       </Route>
-      
+      <Route path="/prescriptionMgt" exact>
+        {!isAuth && <Auth />}
+        {isAuth && <PrescriptionMgt />}
+      </Route>
       </main>
     </Fragment>
   );

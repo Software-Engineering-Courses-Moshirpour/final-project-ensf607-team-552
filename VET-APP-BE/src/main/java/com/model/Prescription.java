@@ -3,6 +3,7 @@ package com.model;
 
 import com.enums.MedType;
 import com.enums.Sex;
+import com.enums.TMType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -19,7 +20,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Entity
 @Table(
-        name = "prescription"
+        name = "prescribe"
 )
 public class Prescription {
     @Id
@@ -44,11 +45,11 @@ public class Prescription {
 
     @Column(name="type",nullable = false)
     @Enumerated(EnumType.STRING)
-    private MedType type;
+    private TMType type;
 
     @ManyToOne
     @JoinColumn(
-            name = "animal",
+            name = "animalId",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
@@ -60,14 +61,30 @@ public class Prescription {
 
     @ManyToOne
     @JoinColumn(
-            name = "user",
+            name = "techUser",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
                     name = "user_prescribe_fk"
             )
     )
-    private User techUser;
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "treatmentReq_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "treatmentReq_prescribe_fk"
+            )
+    )
+    private TreatmentRequest treatmentRequest;
+    @Column(
+            name = "careAttnUser",
+            nullable = false
+    )
+    private int careAttnUser;
 
     @JsonIgnore
     public Animal getAnimal() {
@@ -76,6 +93,6 @@ public class Prescription {
 
     @JsonIgnore
     public User getUser() {
-        return techUser;
+        return user;
     }
 }

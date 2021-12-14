@@ -184,7 +184,7 @@ public class User implements Serializable {
     public void addPrescribe(Prescription prescribe){
         if (!this.prescribes.contains(prescribe)) {
             this.prescribes.add(prescribe);
-            prescribe.setTechUser(this);
+            prescribe.setUser(this);
         }
     }
 
@@ -192,7 +192,7 @@ public class User implements Serializable {
     public void removePrescribe(Prescription prescribe){
         if (this.prescribes.contains(prescribe)) {
             this.prescribes.remove(prescribe);
-            prescribe.setTechUser(null);
+            prescribe.setUser(null);
         }
     }
 

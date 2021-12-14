@@ -1,27 +1,33 @@
 package com.pojo;
 
-import com.enums.RequestStatus;
 import lombok.Data;
 
+import com.enums.TMType;
+import com.model.TreatmentMethod;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 
 
 @Data
 @Entity
-public class CommentObj {
+public class PrescriptionObj {
 
     @NotBlank
     private String id;
 
-    private String description;
+    @NotBlank
+    private TMType type;
     @NotBlank
     private long userId;
     @NotBlank
     private int animalId;
-
+    @NotBlank
+    private int careAttnId;
+    @NotBlank
+    private int treatmentReqId;
+    @NotBlank
+    private String prescription;
 
     public void setId(String id) {
         this.id = id;

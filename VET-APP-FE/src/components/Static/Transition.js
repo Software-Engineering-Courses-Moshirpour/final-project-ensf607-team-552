@@ -10,6 +10,7 @@ export default function Transition() {
         {localStorage.getItem("role")!=ROLE_STUDENT &&  <Link className={classes.request} to="/reqMgt">Request Mgmt</Link>}
         <Link className={classes.animal} to="/animalMgt">Animal Mgmt</Link>    
         <Link className={classes.treatment} to="/treatmentMgt">Treatment Mgmt</Link>   
+        <Link className={classes.prescription} to="/prescriptionMgt">Prescription Mgmt</Link>   
         </div>   
     )
 }

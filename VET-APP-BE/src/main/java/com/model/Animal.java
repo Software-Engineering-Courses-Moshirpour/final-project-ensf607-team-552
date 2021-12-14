@@ -131,6 +131,13 @@ public class Animal {
             fetch = FetchType.LAZY
     )
     private List<TreatmentRequest> treatmentReq  = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "animal",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Prescription> prescriptions  = new ArrayList<>();
 
     public void addTreatmentRequest(TreatmentRequest request){
         if (!this.treatmentReq.contains(request)) {

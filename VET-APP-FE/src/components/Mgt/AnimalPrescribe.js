@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Transition from '../Static/Transition'
 import { useParams,useHistory } from "react-router-dom";
 import { Form, Input, Button,DatePicker,Row,Col,Select, Upload, message } from 'antd';
@@ -12,6 +12,7 @@ const AnimalPrescribe = () => {
     let history = useHistory();
     const { Option } = Select;
     const [userForm] = useForm();
+    const [pageloading, setPageloading] = useState(true)
     let { id } = useParams();
     console.log(id);
     const data = [];
@@ -34,13 +35,15 @@ const AnimalPrescribe = () => {
           });
           console.log(data);
           userForm.setFieldsValue(data[0]); 
+          setPageloading(true)
         });
     }
 
 
     const onFinish = (values) => {
-        
-        axios.post("/api/animal/updateAnimalStatusImage", {id: id, url:values.imageUrl, status: values.status})
+        console.log(values.type +" "+ values.prescription + " "+ data[0].animalId + " "+localStorage.getItem("userId"))
+        axios.post("/api/prescription/addPrescription", {...values, type:values.type, prescription:values.prescription, animalId:data[0].animalId , userId:localStorage.getItem("userId")})
+        //{id: id, url:values.imageUrl, status: values.status}
             .then(
               res => { 
                 message.success(res.data.message); 
@@ -49,7 +52,7 @@ const AnimalPrescribe = () => {
             )
             .catch(
                 res1=>{
-                message.error(res1.data.message);  
+                message.error(res1?.data?.message);  
                 }
             )
             ;
@@ -62,7 +65,7 @@ const AnimalPrescribe = () => {
       };
         
     
-    return (
+    return pageloading &&(
         <React.Fragment>
         <Row>
         <Col span={4} style={{marginTop:"-80px"}}>
@@ -78,8 +81,8 @@ const AnimalPrescribe = () => {
         name="dynamic_rule">
 
             <Form.Item
-                name="types"
-                label="types"
+                name="type"
+                label="type"
                 rules={[
                 {
                     required: true,

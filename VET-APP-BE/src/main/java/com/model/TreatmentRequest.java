@@ -75,6 +75,17 @@ public class TreatmentRequest {
     )
     private Animal animal;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "prescribe_id",
+            nullable = true,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "prescription_treatmentReq_fk"
+            )
+    )
+    private Prescription prescription;
+
     @Column(
             name = "description",
             nullable = false,
