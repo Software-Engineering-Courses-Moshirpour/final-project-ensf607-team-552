@@ -24,7 +24,7 @@ import PrescriptionMgt from './components/Mgt/PrescriptionMgt';
 import { authActions } from './store/auth';
 import { useDispatch } from 'react-redux';
 import AnimalEdit from './components/Mgt/AnimalEdit';
-import { ROLE_ADMIN,ROLE_ANIMALHTTECH } from './components/DummyData/dummy';
+import { ROLE_ADMIN,ROLE_ANIMALHTTECH,ROLE_TEACHINGTECH,ROLE_ANIMALCAREAT } from './components/DummyData/dummy';
 
 
 
@@ -61,9 +61,11 @@ function App() {
        {isAuth && <UserAdd/>}
       </Route>
       <Route path="/animalMgt" exact>
+        {!isAuth && <Auth />}
         <AnimalMgt />
       </Route>
       <Route path='/animalMgt/:id/edit'>
+       {!isAuth && <Auth />}
        {isAuth && <AnimalEdit/>}
       </Route>
 
@@ -73,6 +75,10 @@ function App() {
       <Route path="/reqMgt" exact>
         {!isAuth && <Auth />}
         {isAuth && <ReqMgt />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <ReqMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <ReqMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <ReqMgt />}
+        {localStorage.getItem("role")==ROLE_TEACHINGTECH && isAuth && <ReqMgt />}
       </Route>
       <Route path="/animalProfile/:id/view" exact>
         {!isAuth && <Auth />}
@@ -80,14 +86,21 @@ function App() {
       </Route>
       <Route path="/treatmentMgt" exact>
         {!isAuth && <Auth />}
-        {isAuth && <TreatmentMgt />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <TreatmentMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <TreatmentMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <TreatmentMgt />}
       </Route>
       <Route path="/treatmentMgt/:id/edit" exact>
-       {isAuth && <AnimalPrescribe/>}
+        {!isAuth && <Auth />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <AnimalPrescribe />}
+        {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <AnimalPrescribe />}
+        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <AnimalPrescribe />}
       </Route>
       <Route path="/prescriptionMgt" exact>
         {!isAuth && <Auth />}
-        {isAuth && <PrescriptionMgt />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <PrescriptionMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <PrescriptionMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <PrescriptionMgt />}
       </Route>
       </main>
     </Fragment>
