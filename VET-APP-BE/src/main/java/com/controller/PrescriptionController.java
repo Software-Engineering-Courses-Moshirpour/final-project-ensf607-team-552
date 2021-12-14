@@ -1,6 +1,7 @@
 package com.controller;
 
         import com.enums.AnimalStatus;
+        import com.enums.TreatmentRequestStatus;
         import com.model.*;
         import com.pojo.CommentObj;
         import com.pojo.PrescriptionObj;
@@ -46,7 +47,9 @@ public class PrescriptionController {
         prescription.setCreated(LocalDate.now());
         prescription.setType(prescriptionObj.getType());
         prescription.setPrescription(prescriptionObj.getPrescription());
-        System.out.println(prescriptionObj.getPrescription());
+        TreatmentRequest tr = treatmentReqRepository.findById(prescriptionObj.getTreatmentReqId()).get();
+        tr.setTechstatus(TreatmentRequestStatus.valueOf("PRESCRIBED"));
+        treatmentReqRepository.save(tr);
         prescribeRepository.save(prescription);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("prescription added succ");
@@ -94,13 +97,19 @@ public class PrescriptionController {
     public ResponseTemplate deleteRequest(@RequestParam("id") int id, HttpServletRequest request) {
         ResponseTemplate ret = new ResponseTemplate();
         if(prescribeRepository.existsById(id)){
-            // if id exists user can be deleted
+
             Animal animalUpdate = prescribeRepository.findById(id).get().getAnimal();
-            prescribeRepository.deleteById(id);
+
             animalUpdate.setStatus(AnimalStatus.Available);
             animalRepository.save(animalUpdate);
+            //System.out.println(prescribeRepository.findById(id).get().getTreatmentRequest().getId());
+            TreatmentRequest tr = prescribeRepository.findById(id).get().getTreatmentRequest();
+            tr.setTechstatus(TreatmentRequestStatus.valueOf("PROCESSING"));
+            treatmentReqRepository.save(tr);
+
+            prescribeRepository.deleteById(id);
             ret.setCode(HttpStatus.OK.value());
-            ret.setMessage("delete prescription & update animal status req succ");
+            ret.setMessage("delete prescription & update animal/treatment status req succ");
 
         }else{
             ret.setCode(HttpStatus.BAD_REQUEST.value());

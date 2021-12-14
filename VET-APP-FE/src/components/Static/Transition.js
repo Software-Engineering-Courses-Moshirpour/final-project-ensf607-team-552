@@ -11,6 +11,7 @@ export default function Transition() {
         <Link className={classes.animal} to="/animalMgt">Animal Mgmt</Link>    
         <Link className={classes.treatment} to="/treatmentMgt">Treatment Mgmt</Link>   
         <Link className={classes.prescription} to="/prescriptionMgt">Prescription Mgmt</Link>   
+        <Link className={classes.dailyReport} to="/dailyReportMgt">DailyReport Mgmt</Link>   
         </div>   
     )
 }

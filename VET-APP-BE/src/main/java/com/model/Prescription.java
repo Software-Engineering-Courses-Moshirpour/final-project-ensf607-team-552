@@ -91,7 +91,10 @@ public class Prescription {
     public Animal getAnimal() {
         return animal;
     }
-
+    @JsonIgnore
+    public TreatmentRequest getTreatmentRequest() {
+        return treatmentRequest;
+    }
     @JsonIgnore
     public User getUser() {
         return user;

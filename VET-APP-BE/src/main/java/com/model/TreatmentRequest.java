@@ -101,4 +101,8 @@ public class TreatmentRequest {
     public Animal getAnimal() {
         return animal;
     }
+    @JsonIgnore
+    public Prescription getPrescription() {
+        return prescription;
+    }
 }

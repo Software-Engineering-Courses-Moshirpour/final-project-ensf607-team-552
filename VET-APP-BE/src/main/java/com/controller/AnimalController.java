@@ -174,16 +174,21 @@ public class AnimalController {
     @RequestMapping(value = "/getAllAnimal", method = RequestMethod.GET)
     public ResponseTemplate fetchAllAnimal(HttpServletRequest request, @RequestParam("pageNum") Integer pageNum) {
         int pageSize = 5;
-
+        //System.out.println("test");
         Pageable pageable = PageRequest.of(pageNum-1, pageSize);
         ResponseTemplate ret = new ResponseTemplate();
 
         Page<Animal> animalsbypage = animalRepository.searchAnimalByPage(pageable);
+        //System.out.println("test1");
         List<Animal> animals = animalsbypage.getContent();
+        //System.out.println("test2");
         ret.setPageTotal((int)animalsbypage.getTotalElements());
         ret.setData(animals);
+        //System.out.println("test3");
         ret.setCode(HttpStatus.OK.value());
+        //System.out.println("test4");
         ret.setMessage("find all animal succ");
+        //System.out.println("test5");
         return ret;
     }
 

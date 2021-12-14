@@ -90,6 +90,28 @@
   }
   ]
 
+  const dailyStatusData1 =[
+    {
+      id:'1',
+      stsName:'UnderObservation'
+  },
+    {
+      id:'2',
+      stsName:'Great'
+  },
+  {
+    id:'3',
+    stsName:'Alert'
+  },
+  {
+    id:'4',
+    stsName:'UnderTreatment'
+  },
+  {
+    id:'5',
+    stsName:'Recovering'
+  }
+  ]
 
   const statusData1 =[
     {
@@ -111,3 +133,4 @@
   export const roledata = roleData;
 
   export const statusData = statusData1;
+  export const dailyStatusData = dailyStatusData1;

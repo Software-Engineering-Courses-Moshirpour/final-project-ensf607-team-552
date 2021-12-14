@@ -161,7 +161,6 @@ const TreatmentReqMgt = () => {
                 {localStorage.getItem("role")==ROLE_ANIMALHTTECH && record.techstatus=="PROCESSING" && <Button type="primary" onClick={() => prescribeReq(record)}>Prescribe</Button>}
               
                  {localStorage.getItem("role")==ROLE_ANIMALHTTECH && record.techstatus=="PROCESSING" && <Button type="danger" onClick={() => declineReq(record.key)}>Decline</Button>}
-                 {localStorage.getItem("role")==ROLE_ADMIN && record.adminstatus=="PROCESSING" && <Button type="danger" onClick={() => declineReq(record.key)}>Decline</Button>}
                  <Popconfirm
                         title="Are you sure to delete this record?"
                         onConfirm={() => confirm(record.key)}

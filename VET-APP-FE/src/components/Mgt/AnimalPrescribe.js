@@ -91,7 +91,7 @@ const AnimalPrescribe = () => {
                 ]}
             >
                 <Select
-                placeholder="Select types"
+                placeholder="Select a type"
                 allowClear
                 >
                 {treatmentMethod.map(rl =>(
