@@ -8,8 +8,9 @@
   export const APPROVED="APPROVED";
   export const DECLINED="DECLINED";
   export const PENDING="PENDING";
-
-
+  export const PROCESSING="PROCESSING";
+  export const PRESCRIBED="PRESCRIBED";
+  export const TREATMENT="TREATMENT";
   const roleData =[
       {
           id:'1',
@@ -51,6 +52,41 @@
   {
     id:'4',
     stsName:'Unavailable'
+  },
+  {
+    id:'4',
+    stsName:'Treatment'
+  }
+  ]
+
+  const treatmentMethod1 =[
+    {
+      id:'1',
+      stsName:'Physical exam'
+  },
+    {
+      id:'2',
+      stsName:'Blood work'
+  },
+  {
+    id:'3',
+    stsName:'Bordetella vaccine'
+  },
+  {
+    id:'4',
+    stsName:'Dental cleaning'
+  },
+  {
+    id:'5',
+    stsName:'Deworming'
+  },
+  {
+    id:'6',
+    stsName:'Rabies Vaccination'
+  },
+  {
+    id:'7',
+    stsName:'Chemo Treatment'
   }
   ]
 
@@ -69,7 +105,7 @@
     stsName:'UNKNOWN'
   }
   ]
-
+  export const treatmentMethod=treatmentMethod1;
   export const animalStatus=animalStatus1;
 
   export const roledata = roleData;

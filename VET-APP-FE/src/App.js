@@ -11,6 +11,8 @@ import UserEdit from './components/Mgt/UserEdit';
 import UserAdd from './components/Mgt/UserAdd';
 
 import AnimalMgt from './components/Mgt/AnimalMgt';
+import AnimalPrescribe from './components/Mgt/AnimalPrescribe';
+
 import ReqMgt from './components/Mgt/Req/ReqMgt';
 import AnimalProfile from './components/Profile/AnimalProfile';
 
@@ -63,6 +65,9 @@ function App() {
       <Route path='/animalMgt/:id/edit'>
        {isAuth && <AnimalEdit/>}
       </Route>
+
+
+
       {/* request mgmt */}
       <Route path="/reqMgt" exact>
         {!isAuth && <Auth />}
@@ -76,6 +81,10 @@ function App() {
         {!isAuth && <Auth />}
         {isAuth && <TreatmentMgt />}
       </Route>
+      <Route path="/treatmentMgt/:id/edit" exact>
+       {isAuth && <AnimalPrescribe/>}
+      </Route>
+      
       </main>
     </Fragment>
   );

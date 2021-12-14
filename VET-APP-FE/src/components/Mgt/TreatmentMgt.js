@@ -1,4 +1,4 @@
-import { Row,Col,Space, Button,Popconfirm,message,Form,Select,Modal,Input   } from 'antd'
+import { Row,Col,Space, Button,Popconfirm,message, Spin   } from 'antd'
 import React from 'react'
 import Transition from '../Static/Transition'
 import { Table } from 'antd';
@@ -6,236 +6,177 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from '../Api/request';
 import moment from 'moment';
-import { PENDING,ROLE_ADMIN,ROLE_STUDENT,ROLE_TEACHINGTECH,statusData } from '../DummyData/dummy';
-import { useForm } from 'antd/lib/form/Form';
+import { PRESCRIBED,PROCESSING, DECLINED, ROLE_ADMIN, ROLE_ANIMALHTTECH, ROLE_TEACHINGTECH, ROLE_ANIMALCAREAT } from '../DummyData/dummy';
 
 
-const TreatmentMgt = () => {
-      const { Option } = Select;
-      const [animalData, setAnimalData] = useState([]);
-      const [userData, setUserData] = useState([]);
-      const [reqData, setReqData] = useState([]);
-      const [isModalVisible, setIsModalVisible] = useState(false);
+const TreatmentReqMgt = () => {
+      const [loading, setloading] = useState(true);
+      const [requestData, setrequestData] = useState([]);
+
       let history = useHistory();
-      const [commentForm]=useForm();
 
-      const [data, setData] = useState([]);
-      const [animalId, setanimalId] = useState(0);
+      const data = [];
 
       useEffect(() => {
-        if(userData.length==0 && animalData.length==0){
-          loadAnimal();
-          loadUser();
-        }
+        refreshPage();
       }, [])
 
-      useEffect(() => {
-        const temp = animalData.map(ad => (
-          {...ad,
-          key:ad.id,
-          dob: moment(new Date(ad.dob)).format('YYYY-MM-DD'),
-          requestTo:null
-          }
-          ))
-          setData(temp);
-      }, [animalData])
-
-      function editAnimal(key) {
-        history.push(`/animalMgt/${key}/edit`)
-     };
+      requestData.map(ud=>{
+        data.push({
+            ...ud,
+            key:ud.id,
+            reqDate: moment(new Date(ud.reqDate)).format('YYYY-MM-DD'),
+            animalID: ud
+          })
+      });
 
 
-     function viewAnimal(key) {
-        // history.push(`/animalMgt/${key}/edit`)
-      };
-
-      function commentAnimal(key) {
-        // history.push(`/animalMgt/${key}/edit`)
-        setanimalId(key);
-        setIsModalVisible(true);
-      };
-
+      function confirm(key) {
+        let params = { id: key}
+        axios.delete("api/treatmentReq/deleteRequest",{params})
+        .then(res=>{
+          message.success("treatmentReq deleted successfully");
+        })
+        .then(res2=>{
+          refreshPage();
+        })
+      }
       
-      function viewComments(key) {
-        history.push(`/animalProfile/${key}/view`)
-      };
+      function cancel(e) {
+        message.error('Click on No');
+      }
 
-      function viewAnimalProfile(key) {
-        history.push(`/animalProfile/${key}/view`)
-      };
-
-
-      const handleOk = () => {
-        setIsModalVisible(false);
-      };
+      function test(id){
+        console.log("test");
+        axios.get("api/treatmentReq/getRequestByID?id="+id)
+        .then(res=>{
+          console.log(res.data.data);
     
-      const handleCancel = () => {
-        setIsModalVisible(false);
-      };
+          //userForm.setFieldsValue(data[0]); 
+        });
+      }
+    
+      function prescribeReq(record){
+        history.push(`/treatmentMgt/${record.key}/edit`)
+        //requestId
+        //record.key
+        //history.push(`/animalMgt/${key}/edit`)
+        //console.log("record: " + record.key);
+        //console.log("record: " + record.careAttnId);
+        //console.log(record);
+        /*
+        if(localStorage.getItem("role")==ROLE_ANIMALHTTECH){
+          let params = { reqId: record.key,status: PRESCRIBED,type: ROLE_ANIMALHTTECH }
+           axios.get("api/treatmentReq/updateRequestById",{params})
+            .then(res=>{
+              message.success("prescribeReq updated");
+              console.log(res.data.data);
+            })
+            .then(res2=>{
+              refreshPage();
+            })
+         }*/
+         
+      }
 
-   
-     function reqAnimal(animalstatus,animalID,userID) {
-      let now = moment().format('YYYY-MM-DD');
-        setUnavailableStatus(animalID);
-        axios.post("api/request/addRequest", {adminstatus:PENDING, reqDate:now,
-          returnDate:now, returnedUser:localStorage.getItem("userName"),techstatus:PENDING, animalid: animalID, userid:userID, instructId: localStorage.getItem("userId")})
-       .then(res=>{
-         console.log(res.data.message);  
-         message.success("req animal successfully");
-       })
-    }
-    //console.log(data);
-    function setUnavailableStatus(key){
-      axios.get("api/animal/setUnavailableStatus?id="+key)
-      .then(res=>{
-        console.log(res.data.message);  
-      })
-      .then(res=>{
-        loadAnimal();
-      })
-    }
-    const handleChange = (value,v1,record) => {
-      record.requestTo = value
-      //setuid(value);  
-      let dataTemp = data
-      let rowIndex = dataTemp.find((item) => item.id = record.id)
-      dataTemp.splice(rowIndex, 1, record);
-      setData(dataTemp);
-    };
-    const handleRequest = (record) => {
-      reqAnimal(record.adminstatus,record.id,record.requestTo);
-    };
 
-    function loadAnimal(){
-      if(localStorage.getItem("role")==ROLE_ADMIN){
-        axios.get("api/animal/getAllAnimal")
-      .then(res=>{
-        setAnimalData(res.data.data);  
-      })
-      }else{
-        axios.get("api/animal/getAllAnimal")
-      .then(res=>{
-        setAnimalData(res.data.data);  
-      })
-      }  
-    }
-    function loadRequest(){
-      axios.get("api/request/getAllRequestbyUserID")
-      .then(res=>{
-        setReqData(res.data.data);  
-      })
-    }
 
-    function loadUser(){
-      axios.get("api/user/getAllUserByRole")
-      .then(res=>{
-        setUserData(res.data.data);  
-      })
-      
-    }
 
-    const onFinish = (values) => {
-      axios.post("api/comment/addComment",{...values, description:values.description, animalId:animalId,userId:localStorage.getItem("userId")})
-      .then(res=>{  
-        message.success(res.data.message);
-        setIsModalVisible(false);
-        commentForm.resetFields();
-      })
-    };
-  
-    const onFinishFailed = (errorInfo) => {
-      
-    };
+      function declineReq(requestId){
+        if(localStorage.getItem("role")==ROLE_ANIMALHTTECH){
+          let params = { reqId: requestId,status: DECLINED,type: ROLE_ANIMALHTTECH }
+           axios.get("api/treatmentReq/updateRequestById",{params})
+            .then(res=>{
+              message.success("tech status updated");
+              console.log(res.data.data);
+            })
+            .then(res2=>{
+              refreshPage();
+            })
+         }
+        else if(localStorage.getItem("role")==ROLE_ADMIN){
+          let params = { reqId: requestId,status: DECLINED,type: ROLE_ADMIN }
+           axios.get("api/treatmentReq/updateRequestById",{params})
+          .then(res=>{
+            console.log(res.data);
+            message.success("admin status updated");
+          })
+          .then(res2=>{
+            refreshPage();
+          })
+        }
+      }
+
+
+      function refreshPage(){
+        if(localStorage.getItem("role")==ROLE_ANIMALHTTECH){
+        axios.get("api/treatmentReq/getallReqByTechID?techID="+localStorage.getItem("userId"))
+        .then(res=>{
+          setrequestData(res.data.data); 
+          console.log(res.data.data);
+          setloading(false);
+        })}
+        else if(localStorage.getItem("role")==ROLE_ADMIN){
+          axios.get("api/treatmentReq/getallrequestsForAdmin")
+          .then(res=>{
+            setrequestData(res.data.data);  
+            setloading(false);
+          })
+        }
+        else if(localStorage.getItem("role")==ROLE_ANIMALCAREAT){
+          axios.get("api/treatmentReq/getallReqByCareAttnID?careAttnId="+localStorage.getItem("userId"))
+          .then(res=>{
+            setrequestData(res.data.data);  
+            console.log(res.data.data);
+
+            setloading(false);
+          })
+        }
+      }
     const columns = [
         {
-          title: 'ID',
-          dataIndex: 'id',
-          
+            title: 'Care Attn ID',
+            dataIndex: 'careAttnId',
+            
         },
         {
-          title: 'Image',
-          dataIndex: 'url',
-          render:(text,record) => (
-           <img src={record.url} style={{width:"100px"}}/>
-        )
-          
-        },
-          {
-            title: 'Age',
-            dataIndex: 'age',
-            sorter: (a, b) => a.age - b.age,
-          },
-        {
-          title: 'Breed',
-          dataIndex: 'breed',
+            title: 'Tech status',
+            dataIndex: 'techstatus',
         },
         {
-          title: 'Status',
-          dataIndex: 'status',
-          sorter: (a, b) =>  a.status.localeCompare(b.status),
-        }, 
-        {
-          title: 'Request to',
-          dataIndex: 'userid',
-          render:(text,record) => (
-            localStorage.getItem("role")==ROLE_TEACHINGTECH?
-              (<Select
-              placeholder="Select a health technician"
-              onChange={(e)=>handleChange(e, text, record)}
-              allowClear
-              >
-              {userData.map(rl =>(
-                  <Option key={rl.id} value={rl.id}>{rl.id}</Option>
-              ))}
-              </Select>):""
-          )
+          title: 'Request Date',
+          dataIndex: 'reqdate',
         },
         {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-            <Space size="middle">
-              {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleRequest(record)}>Request</Button>}
-              <Button onClick={() => editAnimal(record.key)}>Edit</Button>
-              <Button onClick={() => viewAnimal(record.key)}>View</Button>
-              {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
-              {localStorage.getItem("role")==ROLE_ADMIN  && <Button onClick={() => viewComments(record.key)}>View Comments</Button>} 
-              {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}
-              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-              <Form 
-                  form={commentForm}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  labelCol={{ span: 6 }}
-                  wrapperCol={{ span: 16 }}
-                  name="dynamic_rule">
-
-
-                      <Form.Item
-                          name="description"
-                          label="description"
-                          rules={[
-                          {
-                              required: true,
-                              message: 'Please input your description',
-                          },
-                          ]}
-                      >
-                          <Input placeholder="Please input your description" />
-                      </Form.Item>
-                      <Form.Item  wrapperCol={{ offset: 6, span: 16 }}>
-                          <Button type="primary" htmlType="submit">
-                          Submit
-                          </Button>
-                      </Form.Item>
-                      
-                  </Form>
-              </Modal>
-            </Space>
-          ),
+            title: 'Description',
+            dataIndex: 'description',
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                
+            
+              <Space size="middle">
+                {localStorage.getItem("role")==ROLE_ANIMALHTTECH && record.techstatus=="PROCESSING" && <Button type="primary" onClick={() => prescribeReq(record)}>Prescribe</Button>}
+              
+                 {localStorage.getItem("role")==ROLE_ANIMALHTTECH && record.techstatus=="PROCESSING" && <Button type="danger" onClick={() => declineReq(record.key)}>Decline</Button>}
+                 {localStorage.getItem("role")==ROLE_ADMIN && record.adminstatus=="PROCESSING" && <Button type="danger" onClick={() => declineReq(record.key)}>Decline</Button>}
+                 <Popconfirm
+                        title="Are you sure to delete this record?"
+                        onConfirm={() => confirm(record.key)}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                    >      
+                 {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.techstatus=="PROCESSING" && <Button type="danger">Delete</Button>}
+                </Popconfirm>
+              </Space>
+            ),
         },
       ];
 
+ 
 
 
     return (
@@ -245,15 +186,16 @@ const TreatmentMgt = () => {
         <Transition></Transition>
         </Col>
         <Col span={16} style={{marginTop:"20px"}}>
-           <h1>Treatment Management</h1>
-           <Table bordered columns={columns} dataSource={data} />
-           {/* <h1>Your Request</h1>
-           <Table bordered columns={req_columns} dataSource={data} /> */}
+           <h1>Treatment Request Management</h1>
+           {loading && <Spin tip="Loading..."/>}                       
+           {!loading && <Table bordered columns={columns} dataSource={data} />}
         </Col>
+
+       
         </Row>
         </React.Fragment>
     )
 }
 
 
-export default TreatmentMgt;
+export default TreatmentReqMgt;

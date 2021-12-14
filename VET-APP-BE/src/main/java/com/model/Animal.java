@@ -124,6 +124,28 @@ public class Animal {
     )
     private List<Request> requests = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy = "animal",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<TreatmentRequest> treatmentReq  = new ArrayList<>();
+
+    public void addTreatmentRequest(TreatmentRequest request){
+        if (!this.treatmentReq.contains(request)) {
+            this.treatmentReq.add(request);
+            request.setAnimal(this);
+        }
+    }
+
+
+    public void removeTreatment(TreatmentRequest request){
+        if (this.treatmentReq.contains(request)) {
+            this.treatmentReq.remove(request);
+            request.setAnimal(null);
+        }
+    }
 
     public void addRequest(Request request){
         if (!this.requests.contains(request)) {

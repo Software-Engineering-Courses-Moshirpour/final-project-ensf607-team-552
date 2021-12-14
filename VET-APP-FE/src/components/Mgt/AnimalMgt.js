@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from '../Api/request';
 import moment from 'moment';
-import { PENDING,ROLE_ADMIN,ROLE_STUDENT,ROLE_TEACHINGTECH,ROLE_ANIMALCAREAT,statusData } from '../DummyData/dummy';
+import { TREATMENT,PROCESSING,PENDING,ROLE_ADMIN,ROLE_STUDENT,ROLE_TEACHINGTECH,ROLE_ANIMALCAREAT,statusData } from '../DummyData/dummy';
 import { useForm } from 'antd/lib/form/Form';
 
 
@@ -16,13 +16,14 @@ const AniamlMgt = () => {
       const [userData, setUserData] = useState([]);
       const [reqData, setReqData] = useState([]);
       const [isModalVisible, setIsModalVisible] = useState(false);
+      const [isTRVisible, setIsTRVisible] = useState(false);
       const [loading, setloading] = useState(true);
       let history = useHistory();
       const [commentForm]=useForm();
-
+      const [treatmentCommentForm]=useForm();
       const [data, setData] = useState([]);
       const [animalId, setanimalId] = useState(0);
-
+      const [techId, settechId] = useState(0);
       useEffect(() => {
         if(userData.length==0 && animalData.length==0){
           loadAnimal();
@@ -73,7 +74,13 @@ const AniamlMgt = () => {
       const handleCancel = () => {
         setIsModalVisible(false);
       };
-
+      const handleTROk = () => {
+        setIsTRVisible(false);
+      };
+    
+      const handleTRCancel = () => {
+        setIsTRVisible(false);
+      };
       const handleAnimalRequest = (record) => {
         reqAnimal(record.adminstatus,record.id,record.requestTo);
       };
@@ -89,19 +96,16 @@ const AniamlMgt = () => {
        })
     }
     const handleTreatmentRequest = (record) => {
-      reqTreatment(record.adminstatus,record.id,record.requestTo);
+      setanimalId(record.id);
+      settechId(record.requestTo);
+      setIsTRVisible(true);
+      //reqTreatment(,, record.description);
     };
+/*
+    function reqTreatment(animalID,userID, description) {
+      setIsTRVisible(true);
 
-    function reqTreatment(animalstatus,animalID,userID) {
-      let now = moment().format('YYYY-MM-DD');
-        setUnavailableStatus(animalID);
-        axios.post("api/request/addRequestTreatment", {adminstatus:PENDING, reqDate:now,
-          returnDate:now, returnedUser:localStorage.getItem("userName"),techstatus:PENDING, animalid: animalID, userid:userID, careAtnId: localStorage.getItem("userId")})
-       .then(res=>{
-         console.log(res.data.message);  
-         message.success("req treatment successfully");
-       })
-    }
+    }*/
     //console.log(data);
     function setUnavailableStatus(key){
       axios.get("api/animal/setUnavailableStatus?id="+key)
@@ -112,6 +116,39 @@ const AniamlMgt = () => {
         loadAnimal();
       })
     }
+    function setTreatmentStatus(key){
+      axios.get("api/animal/setTreatmentStatus?id="+key)
+      .then(res=>{
+        console.log(res.data.message);  
+      })
+      .then(res=>{
+        loadAnimal();
+      })
+    }
+    const onFinishTreatmentReq = (record) => {
+      let now = moment().format('YYYY-MM-DD');
+      axios.post("api/treatmentReq/addRequest", { reqDate:now,
+        techStatus:PROCESSING, animalId: animalId, userId:techId, careAttnId: localStorage.getItem("userId"), description:record.description})
+     .then(res=>{
+       console.log(res.data.message);  
+       message.success("req treatment successfully");
+       setTreatmentStatus(animalId);
+       setIsTRVisible(false);
+       treatmentCommentForm.resetFields();
+     })
+
+/*
+      axios.post("api/comment/addComment",{...values, description:values.description, animalId:animalId,userId:localStorage.getItem("userId")})
+      .then(res=>{  
+        message.success(res.data.message);
+        setIsTRVisible(false);
+        treatmentCommentForm.resetFields();
+      })*/
+    };
+  
+    const onFinishFailedTreatmentReq = (errorInfo) => {
+      
+    };
     const handleChange = (value,v1,record) => {
       record.requestTo = value
       //setuid(value);  
@@ -159,7 +196,7 @@ const AniamlMgt = () => {
     }
 
     const onFinish = (values) => {
-      axios.post("api/comment/addComment",{...values, description:values.description, animalId:animalId,userId:localStorage.getItem("userId")})
+      axios.post("api/comment/addComment",{...values, description:values.description, animalId:animalId, userId:localStorage.getItem("userId")})
       .then(res=>{  
         message.success(res.data.message);
         setIsModalVisible(false);
@@ -222,7 +259,7 @@ const AniamlMgt = () => {
           render: (text, record) => (
             <Space size="middle">
               {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleAnimalRequest(record)}>Request Animal</Button>}
-              {localStorage.getItem("role")==ROLE_ANIMALCAREAT &&  <Button onClick={() => handleTreatmentRequest(record)}>Request Treatment</Button>}
+              {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.status !="Treatment" && <Button onClick={() => handleTreatmentRequest(record)}>Request Treatment</Button>}
               <Button onClick={() => editAnimal(record.key)}>Edit</Button>
               <Button onClick={() => viewAnimal(record.key)}>View</Button>
               {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
@@ -233,6 +270,36 @@ const AniamlMgt = () => {
                   form={commentForm}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 16 }}
+                  name="dynamic_rule">
+
+
+                      <Form.Item
+                          name="description"
+                          label="description"
+                          rules={[
+                          {
+                              required: true,
+                              message: 'Please input your description',
+                          },
+                          ]}
+                      >
+                          <Input placeholder="Please input your description" />
+                      </Form.Item>
+                      <Form.Item  wrapperCol={{ offset: 6, span: 16 }}>
+                          <Button type="primary" htmlType="submit">
+                          Submit
+                          </Button>
+                      </Form.Item>
+                      
+                  </Form>
+              </Modal>
+              <Modal title="Treatment Desc" visible={isTRVisible} onOk={handleTROk} onCancel={handleTRCancel}>
+              <Form 
+                  form={treatmentCommentForm}
+                  onFinish={onFinishTreatmentReq}
+                  onFinishFailed={onFinishFailedTreatmentReq}
                   labelCol={{ span: 6 }}
                   wrapperCol={{ span: 16 }}
                   name="dynamic_rule">

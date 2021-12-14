@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Entity
 @Table(
-        name = "prescribe"
+        name = "prescription"
 )
 public class Prescription {
     @Id
@@ -30,10 +30,10 @@ public class Prescription {
     private int id;
 
     @Column(
-            name = "description ",
+            name = "prescription ",
             nullable = false
     )
-    private String description;
+    private String prescription;
 
 
     @Column(
@@ -67,7 +67,7 @@ public class Prescription {
                     name = "user_prescribe_fk"
             )
     )
-    private User user;
+    private User techUser;
 
     @JsonIgnore
     public Animal getAnimal() {
@@ -76,6 +76,6 @@ public class Prescription {
 
     @JsonIgnore
     public User getUser() {
-        return user;
+        return techUser;
     }
 }

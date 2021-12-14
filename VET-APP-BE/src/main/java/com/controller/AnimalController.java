@@ -151,7 +151,19 @@ public class AnimalController {
         ret.setMessage("update animal succ");
         return ret;
     }
+    @RequestMapping(value = "/setTreatmentStatus", method = RequestMethod.GET)
+    public ResponseTemplate updateTreatmentStatus(@RequestParam("id") int id, HttpServletRequest request) {
+        Optional<Animal> animal= animalRepository.findById(id);
+        AnimalStatus status = AnimalStatus.Treatment;
+        Animal animalObj = animal.get();
+        animalObj.setStatus(status);
 
+        animalRepository.save(animalObj);
+        ResponseTemplate ret = new ResponseTemplate();
+        ret.setCode(HttpStatus.OK.value());
+        ret.setMessage("update animal succ");
+        return ret;
+    }
 
 
 

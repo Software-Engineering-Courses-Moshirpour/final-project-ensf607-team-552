@@ -4,5 +4,6 @@ public enum AnimalStatus {
     Available,
     Injured,
     Sick,
-    Unavailable
+    Unavailable,
+    Treatment
 }

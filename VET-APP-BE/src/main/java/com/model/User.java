@@ -112,6 +112,14 @@ public class User implements Serializable {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
+    private List<TreatmentRequest> treatmentReq  = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
     private List<Prescription> prescribes = new ArrayList<>();
 
 
@@ -122,6 +130,23 @@ public class User implements Serializable {
             fetch = FetchType.LAZY
     )
     private List<Comment> comments = new ArrayList<>();
+
+    public void addTreatmentRequest(TreatmentRequest request){
+        if (!this.treatmentReq.contains(request)) {
+            this.treatmentReq.add(request);
+            request.setUser(this);
+        }
+    }
+
+
+    public void removeTreatment(TreatmentRequest request){
+        if (this.treatmentReq.contains(request)) {
+            this.treatmentReq.remove(request);
+            request.setUser(null);
+        }
+    }
+
+
 
 
     public void addRequest(Request request){
@@ -159,7 +184,7 @@ public class User implements Serializable {
     public void addPrescribe(Prescription prescribe){
         if (!this.prescribes.contains(prescribe)) {
             this.prescribes.add(prescribe);
-            prescribe.setUser(this);
+            prescribe.setTechUser(this);
         }
     }
 
@@ -167,7 +192,7 @@ public class User implements Serializable {
     public void removePrescribe(Prescription prescribe){
         if (this.prescribes.contains(prescribe)) {
             this.prescribes.remove(prescribe);
-            prescribe.setUser(null);
+            prescribe.setTechUser(null);
         }
     }
 
@@ -194,4 +219,6 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
     }
+
+
 }
