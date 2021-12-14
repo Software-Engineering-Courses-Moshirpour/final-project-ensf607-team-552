@@ -25,8 +25,9 @@ const PrescriptionMgt = () => {
         data.push({
             ...ud,
             key:ud.id,
-            reqDate: moment(new Date(ud.reqDate)).format('YYYY-MM-DD'),
-            animalID: ud
+            created: moment(new Date(ud.created)).format('YYYY-MM-DD'),
+            animalID: ud.animalID,
+
           })
       });
 
@@ -109,22 +110,24 @@ const PrescriptionMgt = () => {
 
 
       function refreshPage(){
+        //console.log(localStorage.getItem("userId"));
         if(localStorage.getItem("role")==ROLE_ANIMALHTTECH){
-        axios.get("api/treatmentReq/getallReqByTechID?techID="+localStorage.getItem("userId"))
+            //console.log(localStorage.getItem("userId"));
+        axios.get("api/prescription/getallPreByID?techId="+localStorage.getItem("userId"))
         .then(res=>{
           setrequestData(res.data.data); 
           console.log(res.data.data);
           setloading(false);
         })}
         else if(localStorage.getItem("role")==ROLE_ADMIN){
-          axios.get("api/treatmentReq/getallrequestsForAdmin")
+          axios.get("api/prescription/getallrequestsForAdmin")
           .then(res=>{
             setrequestData(res.data.data);  
             setloading(false);
           })
         }
         else if(localStorage.getItem("role")==ROLE_ANIMALCAREAT){
-          axios.get("api/treatmentReq/getallReqByCareAttnID?careAttnId="+localStorage.getItem("userId"))
+          axios.get("api/prescription/getallReqByCareAttnID?careAttnId="+localStorage.getItem("userId"))
           .then(res=>{
             setrequestData(res.data.data);  
             console.log(res.data.data);
@@ -135,22 +138,27 @@ const PrescriptionMgt = () => {
       }
     const columns = [
         {
-            title: 'Care Attn ID',
-            dataIndex: 'careAttnId',
+            title: 'Animal ID',
+            dataIndex: 'animalId',
+        },
+        {
+            title: 'From Care Attn',
+            dataIndex: 'careAttnUser',
             
         },
         {
-            title: 'Tech status',
-            dataIndex: 'techstatus',
+            title: 'Type',
+            dataIndex: 'type',
         },
         {
-          title: 'Request Date',
-          dataIndex: 'reqdate',
+            title: 'Prescription',
+            dataIndex: 'prescription',
         },
         {
-            title: 'Description',
-            dataIndex: 'description',
+          title: 'Created at',
+          dataIndex: 'created',
         },
+
         {
             title: 'Action',
             key: 'action',

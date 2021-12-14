@@ -3,10 +3,7 @@ package com.controller;
         import com.model.*;
         import com.pojo.CommentObj;
         import com.pojo.PrescriptionObj;
-        import com.repository.AnimalDao;
-        import com.repository.CommentDao;
-        import com.repository.PrescribeDao;
-        import com.repository.UserDao;
+        import com.repository.*;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
         import org.springframework.web.bind.annotation.*;
@@ -32,6 +29,10 @@ public class PrescriptionController {
     @Autowired
     private UserDao userRepository;
 
+    @Autowired
+    private TreatmentReqDao treatmentReqRepository;
+
+
     @RequestMapping(value = "/addPrescription", method = RequestMethod.POST)
     public ResponseTemplate addCommentConfig(@RequestBody PrescriptionObj prescriptionObj, HttpServletRequest request) {
 
@@ -39,6 +40,8 @@ public class PrescriptionController {
         Prescription prescription = new Prescription();
         prescription.setAnimal(animalRepository.findById(prescriptionObj.getAnimalId()).get());
         prescription.setUser(userRepository.findById(prescriptionObj.getUserId()).get());
+        prescription.setCareAttnUser(prescriptionObj.getCareAttnId());
+        prescription.setTreatmentRequest(treatmentReqRepository.findById(prescriptionObj.getTreatmentReqId()).get());
         prescription.setCreated(LocalDate.now());
         prescription.setType(prescriptionObj.getType());
         prescription.setPrescription(prescriptionObj.getPrescription());
@@ -48,13 +51,27 @@ public class PrescriptionController {
         return ret;
     }
     @RequestMapping(value = "/getallPreByID", method = RequestMethod.GET)
-    public ResponseTemplate fetchAllRequestByTechID(@RequestParam(value = "userId") int userId, HttpServletRequest request) {
+    public ResponseTemplate fetchAllPrescribByTechID(@RequestParam(value = "techId") int techId, HttpServletRequest request) {
 
         ResponseTemplate ret = new ResponseTemplate();
-        List<Prescription> prescriptions = prescribeRepository.findPreByTechId(userId);
+        List<Prescription> prescriptions = prescribeRepository.findPreByTechId(techId);
+
+
         ret.setData(prescriptions);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("find all prescription by tech id succ");
+
+        return ret;
+    }
+    @RequestMapping(value = "/getallReqByCareAttnID", method = RequestMethod.GET)
+    public ResponseTemplate fetchAllPrescribByCareAttnID(@RequestParam(value = "careAttnId") int careAttnId, HttpServletRequest request) {
+
+        ResponseTemplate ret = new ResponseTemplate();
+        List<Prescription> prescriptions = prescribeRepository.findPreByCareAttnId(careAttnId);
+
+        ret.setData(prescriptions);
+        ret.setCode(HttpStatus.OK.value());
+        ret.setMessage("find all prescription by care Attn id succ");
 
         return ret;
     }

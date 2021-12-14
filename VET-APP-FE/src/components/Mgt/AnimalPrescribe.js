@@ -14,7 +14,7 @@ const AnimalPrescribe = () => {
     const [userForm] = useForm();
     const [pageloading, setPageloading] = useState(true)
     let { id } = useParams();
-    console.log(id);
+    //console.log(id);
     const data = [];
     
     useEffect(() => {
@@ -25,7 +25,7 @@ const AnimalPrescribe = () => {
     function loadPage(){
         axios.get("api/treatmentReq/getRequestByID?id="+id)
         .then(res=>{
-          console.log(res.data.data);
+          //console.log(res.data.data);
           data.push({
             ...res.data.data,
             treatmentId: res.data.data.id,
@@ -33,7 +33,7 @@ const AnimalPrescribe = () => {
             techId:res.data.data.userId,
             careAttnId: res.data.data.careAttnId
           });
-          console.log(data);
+          //console.log(data);
           userForm.setFieldsValue(data[0]); 
           setPageloading(true)
         });
@@ -41,8 +41,8 @@ const AnimalPrescribe = () => {
 
 
     const onFinish = (values) => {
-        console.log(values.type +" "+ values.prescription + " "+ data[0].animalId + " "+localStorage.getItem("userId"))
-        axios.post("/api/prescription/addPrescription", {...values, type:values.type, prescription:values.prescription, animalId:data[0].animalId , userId:localStorage.getItem("userId")})
+        console.log(data[0].treatmentId+" "+values.type +" "+ values.prescription + " "+ data[0].animalId + " "+localStorage.getItem("userId"))
+        axios.post("/api/prescription/addPrescription", {...values, type:values.type, prescription:values.prescription, animalId: data[0].animalId, careAttnId:data[0].careAttnId, treatmentReqId:data[0].treatmentId, userId:localStorage.getItem("userId")})
         //{id: id, url:values.imageUrl, status: values.status}
             .then(
               res => { 

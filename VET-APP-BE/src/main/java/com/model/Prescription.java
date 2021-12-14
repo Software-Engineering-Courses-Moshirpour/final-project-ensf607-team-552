@@ -80,6 +80,7 @@ public class Prescription {
             )
     )
     private TreatmentRequest treatmentRequest;
+
     @Column(
             name = "careAttnUser",
             nullable = false
@@ -88,8 +89,8 @@ public class Prescription {
 
     @JsonIgnore
     public Animal getAnimal() {
-    return animal;
-}
+        return animal;
+    }
 
     @JsonIgnore
     public User getUser() {

@@ -11,9 +11,10 @@ import java.util.List;
 
 @Repository
 public interface PrescribeDao extends PagingAndSortingRepository<Prescription, Integer> {
-    @Query(value = "SELECT * FROM request r WHERE r.user=?1", nativeQuery = true)
-    List<Prescription> findPreByTechId(int userId);
+    @Query(value = "SELECT * FROM prescribe p WHERE p.tech_user=?1", nativeQuery = true)
+    List<Prescription> findPreByTechId(int techId);
 
-
+    @Query(value = "SELECT * FROM prescribe p WHERE p.care_attn_user=?1", nativeQuery = true)
+    List<Prescription> findPreByCareAttnId(int careAttnId);
 
 }
