@@ -8,6 +8,8 @@ public class ResponseTemplate {
 
     public Object data;
 
+    public Integer pageTotal;
+
     public Integer getCode() {
         return code;
     }
@@ -30,5 +32,9 @@ public class ResponseTemplate {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public void setPageTotal(Integer pageTotal) {
+        this.pageTotal = pageTotal;
     }
 }

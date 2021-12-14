@@ -30,7 +30,7 @@ export default function AnimalEdit() {
             ...res.data.data,
             key:res.data.data.id,
             status:res.data.data.status,
-            imageUrl: res.data.data.url
+            imageUrl: res.data.data.url?res.data.data.url:"https://607607newnewbk123.s3.us-east-2.amazonaws.com/default20211213.png"
           });
           userForm.setFieldsValue(data[0]); 
         });

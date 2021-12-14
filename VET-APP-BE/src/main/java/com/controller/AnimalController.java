@@ -12,6 +12,9 @@ import com.utils.AllowAnon;
 import com.utils.S3Util;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -168,15 +172,18 @@ public class AnimalController {
 
 
     @RequestMapping(value = "/getAllAnimal", method = RequestMethod.GET)
-    public ResponseTemplate fetchAllAnimal(HttpServletRequest request) {
+    public ResponseTemplate fetchAllAnimal(HttpServletRequest request, @RequestParam("pageNum") Integer pageNum) {
+        int pageSize = 5;
 
+        Pageable pageable = PageRequest.of(pageNum-1, pageSize);
         ResponseTemplate ret = new ResponseTemplate();
 
-        Iterable<Animal> animals = animalRepository.findAll();
+        Page<Animal> animalsbypage = animalRepository.searchAnimalByPage(pageable);
+        List<Animal> animals = animalsbypage.getContent();
+        ret.setPageTotal((int)animalsbypage.getTotalElements());
         ret.setData(animals);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("find all animal succ");
-
         return ret;
     }
 

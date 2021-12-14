@@ -1,9 +1,8 @@
-import { Row,Col,Card,Comment, Tooltip, Avatar,Form, Input} from 'antd'
+import { Row,Col,Card,Comment, Tooltip, Avatar,Form, Input,Spin} from 'antd'
 import React,{ Fragment, useEffect, useState }  from 'react'
 import Transition from '../Static/Transition'
 import axios from '../Api/request';
 import { useParams } from "react-router-dom";
-import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 import moment from 'moment';
 import { useForm } from 'antd/lib/form/Form';
 import { ROLE_ADMIN } from '../DummyData/dummy';
@@ -12,7 +11,8 @@ import { ROLE_ADMIN } from '../DummyData/dummy';
 const AnimalProfile = () => {
     let { id } = useParams();
     const [src, setsrc] = useState('');
-    const [commentData, setcommentData] = useState([])
+    const [commentData, setcommentData] = useState([]);
+    const [loading, setloading] = useState(true);
     const [animalForm] = useForm();
     const data = [];
 
@@ -28,6 +28,7 @@ const AnimalProfile = () => {
       })
       .then(res1=>{
         animalForm.setFieldsValue(data[0]);
+        setloading(false);
       })
       
   }, [data])
@@ -41,7 +42,11 @@ const AnimalProfile = () => {
         </Col>
         <Col span={3} style={{marginTop:"20px"}}>
            <h1>Animal Profile</h1>
-           {localStorage.getItem("role")==ROLE_ADMIN &&
+           {localStorage.getItem("role")==ROLE_ADMIN && loading && 
+              <Spin />
+           }
+
+           {localStorage.getItem("role")==ROLE_ADMIN && !loading && 
            <Card
               hoverable
               style={{ width: 240 }}
@@ -72,7 +77,13 @@ const AnimalProfile = () => {
             </Card>
           }
 
-         {localStorage.getItem("role")!=ROLE_ADMIN &&  
+
+          {localStorage.getItem("role")!=ROLE_ADMIN && loading &&
+                      
+                      <Spin/>
+                    }  
+
+         {localStorage.getItem("role")!=ROLE_ADMIN && !loading &&
             <Card
               hoverable
               style={{ width: 240 }}

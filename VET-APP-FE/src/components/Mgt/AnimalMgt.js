@@ -18,6 +18,8 @@ const AniamlMgt = () => {
       const [isModalVisible, setIsModalVisible] = useState(false);
       const [isTRVisible, setIsTRVisible] = useState(false);
       const [loading, setloading] = useState(true);
+      const [pageNum, setpageNum] = useState(1);
+      const [elementTotal, setelementTotal] = useState(0);
       let history = useHistory();
       const [commentForm]=useForm();
       const [treatmentCommentForm]=useForm();
@@ -26,7 +28,7 @@ const AniamlMgt = () => {
       const [techId, settechId] = useState(0);
       useEffect(() => {
         if(userData.length==0 && animalData.length==0){
-          loadAnimal();
+          loadAnimal(1);
           loadUser();
         }
       }, [])
@@ -47,9 +49,6 @@ const AniamlMgt = () => {
      };
 
 
-     function viewAnimal(key) {
-        // history.push(`/animalMgt/${key}/edit`)
-      };
 
       function commentAnimal(key) {
         // history.push(`/animalMgt/${key}/edit`)
@@ -159,32 +158,23 @@ const AniamlMgt = () => {
     };
 
 
-    function loadAnimal(){
-      if(localStorage.getItem("role")==ROLE_ADMIN){
-        axios.get("api/animal/getAllAnimal")
-      .then(res=>{
+    function loadAnimal(pageNum){
+      setloading(true);
+      setpageNum(pageNum);
+      if(localStorage.getItem("role")==ROLE_ADMIN||localStorage.getItem("role")==ROLE_ANIMALCAREAT){
+        axios.get('api/animal/getAllAnimal?pageNum='+pageNum).then((res) => {
+        setelementTotal(res.data.pageTotal);
         setAnimalData(res.data.data); 
-        console.log("TEST0"); 
-      })
-      }else if(localStorage.getItem("role")==ROLE_ANIMALCAREAT){
-        axios.get("api/animal/getAllAnimal")
-      .then(res=>{
-        setAnimalData(res.data.data);  
         setloading(false);
       })
-      }else{
+      }
+      else{
         axios.get("api/animal/getAvailableAnimal")
       .then(res=>{
         setAnimalData(res.data.data);  
         setloading(false);
       })
       }  
-    }
-    function loadRequest(){
-      axios.get("api/request/getAllRequestbyUserID")
-      .then(res=>{
-        setReqData(res.data.data);  
-      })
     }
 
     function loadUser(){
@@ -217,7 +207,7 @@ const AniamlMgt = () => {
           title: 'Image',
           dataIndex: 'url',
           render:(text,record) => (
-           <img src={record.url} style={{width:"100px"}}/>
+            <img src={record.url?record.url:"https://607607newnewbk123.s3.us-east-2.amazonaws.com/default20211213.png"} style={{ width: '100px' }} />
         )
           
         },
@@ -261,7 +251,6 @@ const AniamlMgt = () => {
               {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleAnimalRequest(record)}>Request Animal</Button>}
               {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.status !="Treatment" && <Button onClick={() => handleTreatmentRequest(record)}>Request Treatment</Button>}
               <Button onClick={() => editAnimal(record.key)}>Edit</Button>
-              <Button onClick={() => viewAnimal(record.key)}>View</Button>
               {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
               {localStorage.getItem("role")==ROLE_ADMIN  && <Button onClick={() => viewComments(record.key)}>View Comments</Button>} 
               {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}
@@ -341,7 +330,20 @@ const AniamlMgt = () => {
         <Col span={16} style={{marginTop:"20px"}}>
            <h1>Animal Management</h1>
            {loading && <Spin tip="Loading..."/>}
-           {!loading &&  <Table bordered columns={columns} dataSource={data} />}
+           {!loading &&  <Table 
+            pagination={{ 
+              pageSize: 5,
+              total:elementTotal,
+              onChange(current, pageSize){
+                loadAnimal(current);
+              },
+              current: pageNum,
+              showTotal: function () { 
+                return 'total of ' + elementTotal + ' data'; 
+            }
+            }}
+           
+           bordered columns={columns} dataSource={data} />}
         </Col>
         </Row>
         </React.Fragment>

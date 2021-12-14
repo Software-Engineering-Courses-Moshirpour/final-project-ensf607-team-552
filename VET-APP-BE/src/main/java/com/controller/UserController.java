@@ -172,4 +172,20 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/unblockuserById", method = RequestMethod.GET)
+    public ResponseTemplate unblockuserById(@RequestParam(value = "id")Long id) {
+
+        ResponseTemplate ret = new ResponseTemplate();
+
+        User userfromdb= userRepository.findById(id).get();
+        userfromdb.setStatus(Status.ACTIVE);
+        userRepository.save(userfromdb);
+        ret.setData(userfromdb);
+        ret.setCode(HttpStatus.OK.value());
+        ret.setMessage("unblock user by id succ");
+        return ret;
+    }
+
+
+
 }
