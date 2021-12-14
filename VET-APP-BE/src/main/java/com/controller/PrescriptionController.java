@@ -1,5 +1,6 @@
 package com.controller;
 
+        import com.enums.AnimalStatus;
         import com.model.*;
         import com.pojo.CommentObj;
         import com.pojo.PrescriptionObj;
@@ -75,19 +76,35 @@ public class PrescriptionController {
 
         return ret;
     }
-    /*
-    @RequestMapping(value = "/getallReqByCareAttnID", method = RequestMethod.GET)
-    public ResponseTemplate fetchAllRequestByCareAttnId(@RequestParam(value = "careAttnId") int careAttnId, HttpServletRequest request) {
+    @RequestMapping(value = "/getallPrescribeForAdmin", method = RequestMethod.GET)
+    public ResponseTemplate fetchAllPrescribeForAdmin(HttpServletRequest request) {
 
         ResponseTemplate ret = new ResponseTemplate();
 
-        List<Prescription> requests = prescribeRepository.findRequestByCareAttnId(careAttnId);
+        Iterable<Prescription> requests = prescribeRepository.findAll();
 
         ret.setData(requests);
         ret.setCode(HttpStatus.OK.value());
-        ret.setMessage("find all treatment req by care_attn id succ");
+        ret.setMessage("find all prescription for admin succ");
 
         return ret;
-    }*/
+    }
+    @RequestMapping(value = "/deletePrescription", method = RequestMethod.DELETE)
+    public ResponseTemplate deleteRequest(@RequestParam("id") int id, HttpServletRequest request) {
+        ResponseTemplate ret = new ResponseTemplate();
+        if(prescribeRepository.existsById(id)){
+            // if id exists user can be deleted
+            Animal animalUpdate = prescribeRepository.findById(id).get().getAnimal();
+            prescribeRepository.deleteById(id);
+            animalUpdate.setStatus(AnimalStatus.Available);
+            animalRepository.save(animalUpdate);
+            ret.setCode(HttpStatus.OK.value());
+            ret.setMessage("delete prescription & update animal status req succ");
 
+        }else{
+            ret.setCode(HttpStatus.BAD_REQUEST.value());
+            ret.setMessage("prescription does not exist cannot be deleted");
+        }
+        return ret;
+    }
 }

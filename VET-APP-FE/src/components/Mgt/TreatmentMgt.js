@@ -145,7 +145,7 @@ const TreatmentReqMgt = () => {
         },
         {
           title: 'Request Date',
-          dataIndex: 'reqdate',
+          dataIndex: 'reqDate',
         },
         {
             title: 'Description',
