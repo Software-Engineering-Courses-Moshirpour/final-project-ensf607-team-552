@@ -18,3 +18,13 @@ How to run the project:
         npm install
     
         npm start
+        
+3. six users are currently in the database
+
+        username: Student1, password: 123321
+        username: Admin_1, password: pa
+        username: Technician, password: pe
+        username: Instructor_1, password: pt@123
+        username: tech2, password: 
+        username: AnimalCareAttendent, password: 12345
+
