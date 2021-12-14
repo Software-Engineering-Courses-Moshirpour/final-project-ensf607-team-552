@@ -46,6 +46,7 @@ public class PrescriptionController {
         prescription.setCreated(LocalDate.now());
         prescription.setType(prescriptionObj.getType());
         prescription.setPrescription(prescriptionObj.getPrescription());
+        System.out.println(prescriptionObj.getPrescription());
         prescribeRepository.save(prescription);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("prescription added succ");
