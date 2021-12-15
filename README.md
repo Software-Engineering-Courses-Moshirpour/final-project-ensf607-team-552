@@ -7,7 +7,7 @@
 
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
-link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
+Presentation video link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
 
 There are some usernames and passwords for uses to log in:
 
