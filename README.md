@@ -9,7 +9,7 @@ by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
 Presentation video link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
 
-There are some usernames and passwords for uses to log in:
+Here are usernames and passwords for five different type of users to log in:
 
         username: Student1, password: 123321
         username: Admin_1, password: pa
