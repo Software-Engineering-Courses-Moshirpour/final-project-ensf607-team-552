@@ -7,19 +7,9 @@
 
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
-How to run the project: 
-1. Run backend:  
-        
-        run application.java  in VET-APP-BE/src/main/java/com
-        
-2. Run frontend: 
-       in VET-APP-FE/
-    
-        npm install
-    
-        npm start
-        
-3. six users are currently in the database
+link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
+
+six users are currently in the database
 
         username: Student1, password: 123321
         username: Admin_1, password: pa
