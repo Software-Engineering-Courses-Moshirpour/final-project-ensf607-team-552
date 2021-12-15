@@ -287,7 +287,7 @@ const AniamlMgt = () => {
               {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleAnimalRequest(record)}>Request Animal</Button>}
               {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.status !="Treatment" && <Button onClick={() => handleTreatmentRequest(record)}>Request Treatment</Button>}
               {localStorage.getItem("role")==ROLE_ANIMALCAREAT && <Button onClick={() => handleDailyReport(record)}>Add DailyReport</Button>}
-              <Button onClick={() => editAnimal(record.key)}>Edit</Button>
+              {localStorage.getItem("role")!=ROLE_STUDENT &&<Button onClick={() => editAnimal(record.key)}>Edit</Button>}
               {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
               {localStorage.getItem("role")==ROLE_ADMIN  && <Button onClick={() => viewComments(record.key)}>View Comments</Button>} 
               {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}

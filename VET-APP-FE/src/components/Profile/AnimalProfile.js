@@ -91,7 +91,7 @@ const AnimalProfile = () => {
             >    
             </Card> }         
         </Col>
-        <Col span={6} style={{marginTop:"20px"}}>
+        <Col span={6} style={{marginTop:"60px", marginLeft: "60px"}}>
         <Form 
         form={animalForm}
         labelCol={{ span: 6 }}
