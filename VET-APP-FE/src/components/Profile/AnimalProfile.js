@@ -19,7 +19,8 @@ const AnimalProfile = () => {
 
     useEffect(() => {
       axios.get("api/animal/getAnimalById?id="+id)
-      .then(res=>{    
+      .then(res=>{
+          console.log(res.data.data);    
           setcommentData(res.data.data.comments)
           setsrc(res.data.data.url)
           data.push({
@@ -32,7 +33,7 @@ const AnimalProfile = () => {
         setloading(false);
       })
       
-  }, [data])
+  }, [])
     
     
     return (

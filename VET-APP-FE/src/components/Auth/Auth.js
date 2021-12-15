@@ -109,7 +109,7 @@ const Auth = () => {
               </Form.Item>
             </Form>
       </section>
-      <p>Forgot Password? Please <a href="http://localhost:8085/pwd/forgot_password"> Click </a> here to reset</p>
+      <p>Forgot Password? Please <a href="http://ec2-3-16-55-71.us-east-2.compute.amazonaws.com:8085/pwd/forgot_password"> Click </a> here to reset</p>
 
     </main>
   );
