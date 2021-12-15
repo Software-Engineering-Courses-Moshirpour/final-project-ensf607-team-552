@@ -7,6 +7,8 @@
 
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
+AWS link: http://vetappfrontend.s3-website.us-east-2.amazonaws.com/
+
 Presentation video link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
 
 Here are usernames and passwords for five different type of users to log in:
