@@ -130,6 +130,30 @@ public class User implements Serializable {
             fetch = FetchType.LAZY
     )
     private List<Comment> comments = new ArrayList<>();
+/*
+    @OneToMany(
+            mappedBy = "user",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<AnimalStatusHistory> animalStatusHistories = new ArrayList<>();
+
+    public void addAnimalStatusHistory(AnimalStatusHistory request){
+        if (!this.animalStatusHistories.contains(request)) {
+            this.animalStatusHistories.add(request);
+            request.setUser(this);
+        }
+    }
+
+
+    public void removeAnimalStatusHistory(AnimalStatusHistory request){
+        if (this.animalStatusHistories.contains(request)) {
+            this.animalStatusHistories.remove(request);
+            request.setUser(null);
+        }
+    }
+*/
 
     public void addTreatmentRequest(TreatmentRequest request){
         if (!this.treatmentReq.contains(request)) {

@@ -9,7 +9,7 @@ import moment from 'moment';
 import { PRESCRIBED,PROCESSING, DECLINED, ROLE_ADMIN, ROLE_ANIMALHTTECH, ROLE_TEACHINGTECH, ROLE_ANIMALCAREAT } from '../DummyData/dummy';
 
 
-const PrescriptionMgt = () => {
+const DailyReportMgt = () => {
       const [loading, setloading] = useState(true);
       const [requestData, setrequestData] = useState([]);
 
@@ -25,7 +25,7 @@ const PrescriptionMgt = () => {
         data.push({
             ...ud,
             key:ud.id,
-            created: moment(new Date(ud.createdAt)).format('YYYY-MM-DD'),
+            date: moment(new Date(ud.createdAt)).format('YYYY-MM-DD'),
             animalID: ud.animalID,
 
           })
@@ -34,9 +34,9 @@ const PrescriptionMgt = () => {
 
       function confirm(key) {
         let params = { id: key}
-        axios.delete("api/prescription/deletePrescription",{params})
+        axios.delete("api/dailyReport/deleteReport",{params})
         .then(res=>{
-          message.success("Prescription deleted successfully");
+          message.success("Daily Report deleted successfully");
         })
         .then(res2=>{
           refreshPage();
@@ -56,27 +56,20 @@ const PrescriptionMgt = () => {
 
       function refreshPage(){
         //console.log(localStorage.getItem("userId"));
-        if(localStorage.getItem("role")==ROLE_ANIMALHTTECH){
-            //console.log(localStorage.getItem("userId"));
-        axios.get("api/prescription/getallPreByTechID?techId="+localStorage.getItem("userId"))
-        .then(res=>{
-          setrequestData(res.data.data); 
-          console.log(res.data.data);
-          setloading(false);
-        })}
-        else if(localStorage.getItem("role")==ROLE_ADMIN){
-          axios.get("api/prescription/getallPrescribeForAdmin")
+        if(localStorage.getItem("role")==ROLE_ADMIN || localStorage.getItem("role")==ROLE_ANIMALHTTECH){
+          axios.get("api/dailyReport/getallReports")
           .then(res=>{
             setrequestData(res.data.data);  
+            console.log(requestData);
             setloading(false);
           })
         }
         else if(localStorage.getItem("role")==ROLE_ANIMALCAREAT){
-          axios.get("api/prescription/getallReqByCareAttnID?careAttnId="+localStorage.getItem("userId"))
+          axios.get("api/dailyReport/getReportsById?userId="+localStorage.getItem("userId"))
           .then(res=>{
             setrequestData(res.data.data);  
             console.log(res.data.data);
-
+            //console.log(createdat);
             setloading(false);
           })
         }
@@ -87,23 +80,22 @@ const PrescriptionMgt = () => {
             dataIndex: 'animalId',
         },
         {
-            title: 'From Care Attn',
-            dataIndex: 'careAttnId',
+          title: 'Created By',
+          dataIndex: 'userId',
+        },
+        {
+            title: 'Created At',
+            dataIndex: 'date',
+        },
+        {
+            title: 'Daily Status',
+            dataIndex: 'status',
             
         },
         {
-            title: 'Type',
-            dataIndex: 'type',
+            title: 'Location',
+            dataIndex: 'location',
         },
-        {
-            title: 'Prescription',
-            dataIndex: 'prescription',
-        },
-        {
-          title: 'Created at',
-          dataIndex: 'created',
-        },
-
         {
             title: 'Action',
             key: 'action',
@@ -137,7 +129,7 @@ const PrescriptionMgt = () => {
         <Transition></Transition>
         </Col>
         <Col span={16} style={{marginTop:"20px"}}>
-           <h1>Prescription Management</h1>
+           <h1>Daily Report Management</h1>
            {loading && <Spin tip="Loading..."/>}                       
            {!loading && <Table bordered columns={columns} dataSource={data} />}
         </Col>
@@ -149,4 +141,4 @@ const PrescriptionMgt = () => {
 }
 
 
-export default PrescriptionMgt;
+export default DailyReportMgt;

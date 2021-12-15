@@ -1,39 +1,43 @@
 .mySidenav a {
-    position: absolute;
-    left: 0px;
-    transition: 0.1s;
-    padding: 15px;
-    width: 200px;
-    text-decoration: none;
-    font-size: 20px;
-    color: transparent;
-    border-radius: 0 5px 5px 0;
-    margin-top: 80px;
-    color: white;
-    
-  }
+  position: absolute;
+  left: 0px;
+  transition: 0.1s;
+  padding: 15px;
+  width: 200px;
+  text-decoration: none;
+  font-size: 20px;
+  color: transparent;
+  border-radius: 0 5px 5px 0;
+  margin-top: 80px;
+  color: white;
   
+}
 
-  .user {
-    top: 20px;
-    background-color: #04AA6D;
-  }
-  
-  .request {
-    top: 85px;
-    background-color: #2196F3;
-  }
-  
-  .animal {
-    top: 150px;
-    background-color: #f44336;
-  }
-  
-  .treatment {
-    top: 215px;
-    background-color: #faad14;
-  }
-  .prescription {
-    top: 280px;
-    background-color: #722ed1;
-  }
+
+.user {
+  top: 20px;
+  background-color: #04AA6D;
+}
+
+.request {
+  top: 85px;
+  background-color: #2196F3;
+}
+
+.animal {
+  top: 150px;
+  background-color: #f44336;
+}
+
+.treatment {
+  top: 215px;
+  background-color: #faad14;
+}
+.prescription {
+  top: 280px;
+  background-color: #722ed1;
+}
+.dailyReport {
+  top: 345px;
+  background-color: #13c2c2;
+}

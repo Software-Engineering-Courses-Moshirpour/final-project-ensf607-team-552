@@ -106,7 +106,7 @@ public class Animal {
             fetch = FetchType.LAZY
     )
     private List<Comment> comments = new ArrayList<>();
-
+/*
     @OneToMany(
             mappedBy = "animal",
             orphanRemoval = true,
@@ -114,7 +114,7 @@ public class Animal {
             fetch = FetchType.LAZY
     )
     private List<AnimalStatusHistory> hists = new ArrayList<>();
-
+*/
 
     @OneToMany(
             mappedBy = "animal",
@@ -131,6 +131,7 @@ public class Animal {
             fetch = FetchType.LAZY
     )
     private List<TreatmentRequest> treatmentReq  = new ArrayList<>();
+
 
 
     public void addTreatmentRequest(TreatmentRequest request){
@@ -163,7 +164,7 @@ public class Animal {
         }
     }
 
-
+/*
     public void addHist(AnimalStatusHistory hist){
         if (!this.hists.contains(hist)) {
             this.hists.add(hist);
@@ -178,7 +179,7 @@ public class Animal {
             hist.setAnimal(null);
         }
     }
-
+*/
 
 
 

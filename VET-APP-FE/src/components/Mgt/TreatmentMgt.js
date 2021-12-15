@@ -135,7 +135,7 @@ const TreatmentReqMgt = () => {
       }
     const columns = [
         {
-            title: 'Care Attn ID',
+            title: 'From Care Attn',
             dataIndex: 'careAttnId',
             
         },

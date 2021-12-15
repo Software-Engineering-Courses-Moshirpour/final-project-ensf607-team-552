@@ -11,6 +11,7 @@ package com.controller;
 
         import javax.servlet.http.HttpServletRequest;
         import java.time.LocalDate;
+        import java.util.ArrayList;
         import java.util.HashSet;
         import java.util.List;
         import java.util.Set;
@@ -52,14 +53,26 @@ public class PrescriptionController {
         ret.setMessage("prescription added succ");
         return ret;
     }
-    @RequestMapping(value = "/getallPreByID", method = RequestMethod.GET)
+    @RequestMapping(value = "/getallPreByTechID", method = RequestMethod.GET)
     public ResponseTemplate fetchAllPrescribByTechID(@RequestParam(value = "techId") int techId, HttpServletRequest request) {
 
         ResponseTemplate ret = new ResponseTemplate();
         List<Prescription> prescriptions = prescribeRepository.findPreByTechId(techId);
+        List<PrescriptionObj> prescriptionsObj = new ArrayList<>();
+        for (Prescription pre : prescriptions){
+            PrescriptionObj p = new PrescriptionObj();
+            p.setId(pre.getId());
+            p.setCareAttnId(pre.getCareAttnUser());
+            p.setCreatedAt(pre.getCreated());
+            p.setPrescription(pre.getPrescription());
+            p.setType(pre.getType());
+            p.setAnimalId(pre.getAnimal().getId());
+            p.setTreatmentReqId(pre.getTreatmentRequest().getId());
+            p.setUserId(pre.getUser().getId());
+            prescriptionsObj.add(p);
+        }
 
-
-        ret.setData(prescriptions);
+        ret.setData(prescriptionsObj);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("find all prescription by tech id succ");
 
@@ -69,11 +82,25 @@ public class PrescriptionController {
     public ResponseTemplate fetchAllPrescribByCareAttnID(@RequestParam(value = "careAttnId") int careAttnId, HttpServletRequest request) {
 
         ResponseTemplate ret = new ResponseTemplate();
-        List<Prescription> prescriptions = prescribeRepository.findPreByCareAttnId(careAttnId);
 
-        ret.setData(prescriptions);
+        List<Prescription> prescriptions = prescribeRepository.findPreByTechId(careAttnId);
+        List<PrescriptionObj> prescriptionsObj = new ArrayList<>();
+        for (Prescription pre : prescriptions){
+            PrescriptionObj p = new PrescriptionObj();
+            p.setId(pre.getId());
+            p.setCareAttnId(pre.getCareAttnUser());
+            p.setCreatedAt(pre.getCreated());
+            p.setPrescription(pre.getPrescription());
+            p.setType(pre.getType());
+            p.setAnimalId(pre.getAnimal().getId());
+            p.setTreatmentReqId(pre.getTreatmentRequest().getId());
+            p.setUserId(pre.getUser().getId());
+            prescriptionsObj.add(p);
+        }
+
+        ret.setData(prescriptionsObj);
         ret.setCode(HttpStatus.OK.value());
-        ret.setMessage("find all prescription by care Attn id succ");
+        ret.setMessage("find all prescription by tech id succ");
 
         return ret;
     }
@@ -83,8 +110,21 @@ public class PrescriptionController {
         ResponseTemplate ret = new ResponseTemplate();
 
         Iterable<Prescription> requests = prescribeRepository.findAll();
+        List<PrescriptionObj> prescriptionsObj = new ArrayList<>();
+        for (Prescription pre : requests){
+            PrescriptionObj p = new PrescriptionObj();
+            p.setId(pre.getId());
+            p.setCareAttnId(pre.getCareAttnUser());
+            p.setCreatedAt(pre.getCreated());
+            p.setPrescription(pre.getPrescription());
+            p.setType(pre.getType());
+            p.setAnimalId(pre.getAnimal().getId());
+            p.setTreatmentReqId(pre.getTreatmentRequest().getId());
+            p.setUserId(pre.getUser().getId());
+            prescriptionsObj.add(p);
+        }
 
-        ret.setData(requests);
+        ret.setData(prescriptionsObj);
         ret.setCode(HttpStatus.OK.value());
         ret.setMessage("find all prescription for admin succ");
 

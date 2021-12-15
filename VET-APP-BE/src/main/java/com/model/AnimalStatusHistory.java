@@ -1,7 +1,7 @@
 package com.model;
 
 
-import com.enums.AnimalStatus;
+import com.enums.DailyStatusTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,22 +38,14 @@ public class AnimalStatusHistory {
     @Column(name="location")
     private String location;
 
+    @Column(name="animalId")
+    private int animalId;
+    @Column(name="userId")
+    private long userId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20)
-    private AnimalStatus status;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "animal",
-            nullable = false,
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(
-                    name = "animal_hist_fk"
-            )
-    )
-    private Animal animal;
-
+    private DailyStatusTypes status;
 
 
 

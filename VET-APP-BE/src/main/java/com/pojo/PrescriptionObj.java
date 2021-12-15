@@ -7,6 +7,7 @@ import com.model.TreatmentMethod;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 
 @Data
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class PrescriptionObj {
 
     @NotBlank
-    private String id;
+    private int id;
 
     @NotBlank
     private TMType type;
@@ -25,15 +26,17 @@ public class PrescriptionObj {
     @NotBlank
     private int careAttnId;
     @NotBlank
+    private LocalDate createdAt;
+    @NotBlank
     private int treatmentReqId;
     @NotBlank
     private String prescription;
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     @Id
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

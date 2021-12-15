@@ -19,7 +19,7 @@ import AnimalProfile from './components/Profile/AnimalProfile';
 
 import TreatmentMgt from './components/Mgt/TreatmentMgt';
 import PrescriptionMgt from './components/Mgt/PrescriptionMgt';
-
+import DailyReportMgt from './components/Mgt/DailyReportMgt';
 
 import { authActions } from './store/auth';
 import { useDispatch } from 'react-redux';
@@ -74,10 +74,8 @@ function App() {
       {/* request mgmt */}
       <Route path="/reqMgt" exact>
         {!isAuth && <Auth />}
-        {isAuth && <ReqMgt />}
         {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <ReqMgt />}
         {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <ReqMgt />}
-        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <ReqMgt />}
         {localStorage.getItem("role")==ROLE_TEACHINGTECH && isAuth && <ReqMgt />}
       </Route>
       <Route path="/animalProfile/:id/view" exact>
@@ -102,6 +100,13 @@ function App() {
         {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <PrescriptionMgt />}
         {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <PrescriptionMgt />}
       </Route>
+      <Route path="/dailyReportMgt" exact>
+        {!isAuth && <Auth />}
+        {localStorage.getItem("role")==ROLE_ADMIN && isAuth && <DailyReportMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALHTTECH && isAuth && <DailyReportMgt />}
+        {localStorage.getItem("role")==ROLE_ANIMALCAREAT && isAuth && <DailyReportMgt />}
+      </Route>
+
       </main>
     </Fragment>
   );
