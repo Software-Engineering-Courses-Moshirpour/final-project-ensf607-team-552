@@ -4,7 +4,8 @@ import axios from 'axios'
 //axios.defaults.baseURL = process.env.BASE_URL;
 
 
-axios.defaults.baseURL =  "http://localhost:8085";
+//axios.defaults.baseURL =  "http://localhost:8085";
+axios.defaults.baseURL =  "http://ec2-3-16-55-71.us-east-2.compute.amazonaws.com:8085";
 
 
 axios.interceptors.request.use(
