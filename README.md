@@ -9,12 +9,11 @@ by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
 link: https://607607newnewbk123.s3.us-east-2.amazonaws.com/607.mp4
 
-six users are currently in the database
+There are some usernames and passwords for uses to log in:
 
         username: Student1, password: 123321
         username: Admin_1, password: pa
         username: Technician, password: pe
         username: Instructor_1, password: pt@123
-        username: tech2, password: 
         username: AnimalCareAttendent, password: 12345
 
