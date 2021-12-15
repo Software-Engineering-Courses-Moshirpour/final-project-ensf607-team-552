@@ -267,7 +267,7 @@ const AniamlMgt = () => {
           render:(text,record) => (
             localStorage.getItem("role")==ROLE_TEACHINGTECH ||  localStorage.getItem("role")==ROLE_ANIMALCAREAT?
               (<Select
-              placeholder="Select a health technician"
+              placeholder="Technician ID"
               onChange={(e)=>handleChange(e, text, record)}
               allowClear
               >
@@ -285,12 +285,12 @@ const AniamlMgt = () => {
           render: (text, record) => (
             <Space size="middle">
               {localStorage.getItem("role")==ROLE_TEACHINGTECH &&  <Button onClick={() => handleAnimalRequest(record)}>Request Animal</Button>}
-              {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.status !="Treatment" && <Button onClick={() => handleTreatmentRequest(record)}>Request Treatment</Button>}
+              {localStorage.getItem("role")==ROLE_ANIMALCAREAT && record.status !="Treatment" && <Button onClick={() => handleTreatmentRequest(record)}>Req Treatment</Button>}
               {localStorage.getItem("role")==ROLE_ANIMALCAREAT && <Button onClick={() => handleDailyReport(record)}>Add DailyReport</Button>}
-              {localStorage.getItem("role")!=ROLE_STUDENT &&<Button onClick={() => editAnimal(record.key)}>Edit</Button>}
-              {localStorage.getItem("role")==ROLE_STUDENT || localStorage.getItem("role")==ROLE_TEACHINGTECH && <Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
+              {localStorage.getItem("role")!=ROLE_STUDENT && localStorage.getItem("role")!=ROLE_TEACHINGTECH &&<Button onClick={() => editAnimal(record.key)}>Edit</Button>}
+              {<Button onClick={() => commentAnimal(record.key)}>Comment</Button>}
               {localStorage.getItem("role")==ROLE_ADMIN  && <Button onClick={() => viewComments(record.key)}>View Comments</Button>} 
-              {localStorage.getItem("role")==ROLE_STUDENT && <Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}
+              {<Button onClick={() => viewAnimalProfile(record.key)}>View Profile</Button>}
               <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
               <Form 
                   form={commentForm}
