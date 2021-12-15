@@ -9,9 +9,9 @@ export default function Transition() {
         {localStorage.getItem("role")==ROLE_ADMIN && <Link className={classes.user} to="/userMgt">User Mgmt</Link>}
         {localStorage.getItem("role")!=ROLE_STUDENT && localStorage.getItem("role")!=ROLE_ANIMALCAREAT &&  <Link className={classes.request} to="/reqMgt">Request Mgmt</Link>}
         <Link className={classes.animal} to="/animalMgt">Animal Mgmt</Link>    
-        <Link className={classes.treatment} to="/treatmentMgt">Treatment Mgmt</Link>   
-        <Link className={classes.prescription} to="/prescriptionMgt">Prescription Mgmt</Link>   
-        <Link className={classes.dailyReport} to="/dailyReportMgt">DailyReport Mgmt</Link>   
+        {localStorage.getItem("role")!=ROLE_STUDENT &&<Link className={classes.treatment} to="/treatmentMgt">Treatment Mgmt</Link>}   
+        {localStorage.getItem("role")!=ROLE_STUDENT &&<Link className={classes.prescription} to="/prescriptionMgt">Prescription Mgmt</Link>}   
+        {localStorage.getItem("role")!=ROLE_STUDENT &&<Link className={classes.dailyReport} to="/dailyReportMgt">DailyReport Mgmt</Link>}   
         </div>   
     )
 }
