@@ -3,7 +3,7 @@
 
 * ENSF 607 - Advanced Software Development and Architecture*
 
-* Sprint 5 - Integeration*
+* Sprint 5 -  Integeration*
 
 by Yuhua Guo, Pang-Cheng Chang, Jintao Wang
 
