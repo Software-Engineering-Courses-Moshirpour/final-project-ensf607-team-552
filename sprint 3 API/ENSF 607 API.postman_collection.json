@@ -1,0 +1,1489 @@
+{
+	"info": {
+		"_postman_id": "0d17a759-4eb0-4d70-a512-c7ea9cec7f57",
+		"name": "ENSF 607 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add animal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"breed\": \"AbigarAdd\",\r\n    \"color\": \"yellowAdd\",\r\n    \"type\": \"horseAdd\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animals/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all animals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/animals/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add animal for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"breed\": \"Abigar\",\r\n    \"color\": \"yellow\",\r\n    \"type\": \"horse\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animals/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update animal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"breed\": \"Abigar1\",\r\n    \"color\": \"yellow1\",\r\n    \"type\": \"horse1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animals/register?id=c973d429-ad43-476a-9313-f8d4b9418a37",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "c973d429-ad43-476a-9313-f8d4b9418a37"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add animal for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"breed\": \"Abigar for del\",\r\n    \"color\": \"yellow\",\r\n    \"type\": \"horse\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animals/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an animal",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/animals/register?id=8475a4c6-9b03-49c6-b8e2-72fe718bb21a",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8475a4c6-9b03-49c6-b8e2-72fe718bb21a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all animals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/animals/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animals",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"User\",\r\n    \"password\": \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add user for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"User for update\",\r\n    \"password\": \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"User for update2\",\r\n    \"password\": \"password2\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/users/register?id=e04f142b-9d2c-411c-b483-067898843cfe",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "e04f142b-9d2c-411c-b483-067898843cfe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add user for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"User for delete\",\r\n    \"password\": \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/users/register?id=0582ffe5-c9ee-4f5d-972c-159e6fc946ae",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0582ffe5-c9ee-4f5d-972c-159e6fc946ae"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalId\": 1,\r\n    \"description\": \"He is ill.\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/comments/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/comments/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add comment for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalId\": 1,\r\n    \"description\": \"for update\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/comments/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update comment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalId\": 1,\r\n    \"description\": \"update 1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/comments/register?id=f9d58166-505d-4984-91e1-41dce27a408f",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "f9d58166-505d-4984-91e1-41dce27a408f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add comment for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalId\": 1,\r\n    \"description\": \"del\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/comments/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete comment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/comments/register?id=db3a475f-34a6-45b4-bf1d-e4bf8e9bed52",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "db3a475f-34a6-45b4-bf1d-e4bf8e9bed52"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/comments/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"createDate\": \"2021,3,9\",\r\n    \"address\": \"image5.png\",\r\n    \"animalID\": 1,\r\n    \"type\": \"Treatment\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/images/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/images/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add image for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"createDate\": \"2021,3,9\",\r\n    \"address\": \"image5.png\",\r\n    \"animalID\": 1,\r\n    \"type\": \"Treatment for update\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/images/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update images",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"createDate\": \"2021,3,9\",\r\n    \"address\": \"image5.png\",\r\n    \"animalID\": 1,\r\n    \"type\": \"Treatment for update1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/images/register?id=a97cc408-4727-4269-8333-3eeb0a45bafe",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "a97cc408-4727-4269-8333-3eeb0a45bafe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add image for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"createDate\": \"2021,3,9\",\r\n    \"address\": \"image5.png\",\r\n    \"animalID\": 1,\r\n    \"type\": \"Treatment for delete\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/images/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete image",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/images/register?id=ec9bd57b-4b7f-46eb-8e6d-b8610e271d5b",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "ec9bd57b-4b7f-46eb-8e6d-b8610e271d5b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/images/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"images",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add MedicalRecordsType",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"XRAY - add\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all MedicalRecordsType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add MedicalRecordsType for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"XRAY - update\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update MedicalRecordsTypes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"XRAY - update1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register?id=f73f4e64-d958-4dfa-9ce4-9007f7327817",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "f73f4e64-d958-4dfa-9ce4-9007f7327817"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add MedicalRecordsType for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"XRAY - delete\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete MedicalRecordsType",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register?id=ab705790-d460-4a3a-88cc-be26cc5c0451",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "ab705790-d460-4a3a-88cc-be26cc5c0451"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all MedicalRecordsType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/medicalrecordstypes/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medicalrecordstypes",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add PrescriptionItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Hourly - add\",\r\n    \"method\": \"1\",\r\n    \"name\": \"body temperature care\",\r\n    \"prescription\": \"1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all PrescriptionItem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add PrescriptionItem for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Hourly - update\",\r\n    \"method\": \"1\",\r\n    \"name\": \"body temperature care\",\r\n    \"prescription\": \"1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update PrescriptionItem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Hourly update2\",\r\n    \"method\": \"1\",\r\n    \"name\": \"body temperature care\",\r\n    \"prescription\": \"1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register?id=495e2c3d-3d0b-4c1c-a30b-c2cf8cc4d6f2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "495e2c3d-3d0b-4c1c-a30b-c2cf8cc4d6f2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add PrescriptionItem for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Hourly delete\",\r\n    \"method\": \"1\",\r\n    \"name\": \"body temperature care\",\r\n    \"prescription\": \"1\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete PrescriptionItem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register?id=cad7ce86-66d9-4775-8e64-7e2deff1678a",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "cad7ce86-66d9-4775-8e64-7e2deff1678a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all PrescriptionItem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/prescriptionitems/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptionitems",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prescription",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalID\": 1,\r\n    \"createDate\": \"2021,3,2\",\r\n    \"description\": \"The animal's prescription(description) add\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all Prescription",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prescription for update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalID\": 1,\r\n    \"createDate\": \"2021,3,2\",\r\n    \"description\": \"The animal's prescription(description) update\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Prescription",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalID\": 1,\r\n    \"createDate\": \"2021,3,2\",\r\n    \"description\": \"The animal's prescription(description) update2\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register?id=eab1fa18-602b-45ab-8e20-358f07830c85",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "eab1fa18-602b-45ab-8e20-358f07830c85"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prescription for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"animalID\": 1,\r\n    \"createDate\": \"2021,3,2\",\r\n    \"description\": \"The animal's prescription(description) delete\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Prescription",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register?id=96e82096-3b5b-46b5-bc9d-90242283cf78",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "96e82096-3b5b-46b5-bc9d-90242283cf78"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all Prescription",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/prescriptions/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"prescriptions",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TreatmentMethod",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Physical exam - add\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all TreatmentMethod",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TreatmentMethodfor update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Physical exam - update\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TreatmentMethod",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Physical exam - update2\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register?id=1a929d20-a363-4a93-8d5c-bdb281e16190",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1a929d20-a363-4a93-8d5c-bdb281e16190"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TreatmentMethod for delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Physical exam - delete\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TreatmentMethod",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register?id=ef4abc7f-3e70-4af1-9466-b3c9104e5b81",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "ef4abc7f-3e70-4af1-9466-b3c9104e5b81"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all TreatmentMethod",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/treatmentmethods/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"treatmentmethods",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add AnimalStatusHistory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dateAndTime\": \"2021/11/18\",\r\n    \"description\": \"description add\",\r\n    \"location\": \"Hospital\",\r\n    \"status\": \"Injured\",\r\n    \"animal\": 1\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animalStatusHistory/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animalStatusHistory",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all AnimalStatusHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/animalStatusHistory/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animalStatusHistory",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add AnimalStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Injured\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/animalStatus/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animalStatus",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all AnimalStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/animalStatus/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"animalStatus",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add History",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"2021/11/19\",\r\n    \"type\": \"temperature\",\r\n    \"value\": \"valueAdd\",\r\n    \"user\": 2,\r\n    \"animal\": 2\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/api/history/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"history",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show all History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/history/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"history",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

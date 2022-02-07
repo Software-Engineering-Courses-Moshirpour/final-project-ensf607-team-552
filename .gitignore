@@ -1,0 +1,63 @@
+VET-APP-BE/HELP.md
+VET-APP-BE/target/
+VET-APP-BE/!.mvn/wrapper/maven-wrapper.jar
+VET-APP-BE/!**/src/main/**/target/
+VET-APP-BE/!**/src/test/**/target/
+
+### STS ###
+VET-APP-BE/.apt_generated
+VET-APP-BE/.classpath
+VET-APP-BE/.factorypath
+VET-APP-BE/.project
+VET-APP-BE/.settings
+VET-APP-BE/.springBeans
+VET-APP-BE/.sts4-cache
+
+### IntelliJ IDEA ###
+VET-APP-BE/.idea
+VET-APP-BE/*.iws
+VET-APP-BE/*.iml
+VET-APP-BE/*.ipr
+
+### NetBeans ###
+VET-APP-BE/nbproject/private/
+VET-APP-BE/nbbuild/
+VET-APP-BE/dist/
+VET-APP-BE/nbdist/
+VET-APP-BE/.nb-gradle/
+VET-APP-BE/build/
+VET-APP-BE/!**/src/main/**/build/
+VET-APP-BE/!**/src/test/**/build/
+
+### VS Code ###
+VET-APP-BE/.vscode/
+
+
+## -------front END
+
+VET-APP-FE/.DS_Store
+VET-APP-FE/.vscode
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+VET-APP-FE/node_modules
+VET-APP-FE/.pnp
+VET-APP-FE/.pnp.js
+
+# testing
+VET-APP-FE/coverage
+
+# production
+VET-APP-FE/build
+
+# misc
+VET-APP-FE/.DS_Store
+VET-APP-FE/.env.local
+VET-APP-FE/.env.development.local
+VET-APP-FE/.env.test.local
+VET-APP-FE/.env.production.local
+
+VET-APP-FE/npm-debug.log*
+VET-APP-FE/yarn-debug.log*
+VET-APP-FE/yarn-error.log*
+
